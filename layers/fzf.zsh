@@ -86,6 +86,7 @@ spacezsh.fzf.widget.cd-norecursive() {
     else
       LBUFFER="${LBUFFER}${(q)file}"
       omz_termsupport_precmd
+      zle reset-prompt
       return 0
     fi
 
@@ -129,6 +130,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
       cd -
     else
       LBUFFER="${LBUFFER}$(echo ${file:a} | sed 's/^/'\''/;s/$/'\''/')"
+      zle reset-prompt
       return 0
     fi
 
