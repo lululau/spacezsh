@@ -16,12 +16,15 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'i' ~/Library/Mobile\ Documents/com~apple~CloudDocs
     'j' ~/cascode/spring/demo
     'k' ~/kt
+    'l' ~/Library/Application\ Support
+    'L' ~/Library/Preferences
     'm' ~/Movies
     'o' ~/Documents
     'p' '=> popd -q'
     'P' '=> project_root_widget'
     'r' ~/.tmux-resurrect
-    's' ~/snips
+    's' ~/.spacezsh
+    'S' ~/snips
     't' ~/tmp
     'T' ~/.tmux
     'v' /Volumes
