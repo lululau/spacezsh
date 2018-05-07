@@ -32,4 +32,3 @@ for k (${(k)SPACEZSH_DIR_MAPPINGS}); do
         bindkey "$k" spacezsh.dir.widget
     fi
 done
-

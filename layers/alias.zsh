@@ -25,12 +25,26 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'gp' 'git log -p\n'
     'g-' 'git checkout -\n'
     'gg' 'magit\n'
+    'gr' 'git remote -vvv\n'
+    'gb' 'git branch -vvv\n'
+    'gL' 'git pull\n'
+    'gP' 'git push\n'
     $'\egs' 'git status\n'
     $'\egd' 'git diff\n'
     $'\egl' 'git log\n'
     $'\egp' 'git log -p\n'
     $'\eg-' 'git checkout -\n'
     $'\eg\eg' 'magit\n'
+
+    # Homebrew
+    'bu' 'brew update && brew outdated\n'
+    'bU' 'brew upgrade && brew cleanup\n'
+    'bi' 'brew info '
+    'bl' 'brew list'
+    'b/' 'brew list | ag '
+    'bsl' 'brew services list\n'
+    'bss' 'brew services start '
+    'bse' 'brew services stop '
 )
 
 
