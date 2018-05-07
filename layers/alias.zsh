@@ -46,9 +46,13 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'bss' 'brew services start '
     'bse' 'brew services stop '
 
-    'xt' 'tail -f _@_\n'
-    'xb' 'bat _@_\n'
     'xa' 'cat _@_ | ag '
+    'xb' 'bat _@_\n'
+    'xh' 'head _@_ | '
+    'xi' 'cat _@_ | iconv -f GBK '
+    'xI' 'head _@_ | iconv -f GBK '
+    'xt' 'tail -f _@_\n'
+    'xw' 'wc -l _@_\n'
 )
 
 function spacezsh.alias.widget() {
