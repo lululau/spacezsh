@@ -40,18 +40,54 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'bu' 'brew update && brew outdated\n'
     'bU' 'brew upgrade && brew cleanup\n'
     'bi' 'brew info '
-    'bl' 'brew list'
+    'bl' 'brew list\n'
     'b/' 'brew list | ag '
     'bsl' 'brew services list\n'
     'bss' 'brew services start '
     'bse' 'brew services stop '
+
+    'xt' 'tail -f _@_\n'
+    'xb' 'bat _@_\n'
+    'xa' 'cat _@_ | ag '
 )
 
+function spacezsh.alias.widget() {
+    local args=(${(z)BUFFER})
+    if [[ "${KEYS[1,2]}" = "$SPACEZSH_LEADER" ]]; then
+      local key=$KEYS[3,-1]
+    else
+        local key=$KEYS
+    fi
+    local value=$SPACEZSH_ALIAS_MAPPINGS[$key]
+    if [[ "$value" =~ _@_ ]]; then
+      value=${value//_@_/$BUFFER}
+    else
+        for i ({1..10}); do
+            if [[ "$value" =~ _$i_ ]]; then
+              value=${value//_$i_/$args[$i]}
+            fi
+        done
+    fi
+
+    BUFFER=''
+
+    if [ "$value[-2,-1]" = '\n' ]; then
+        LBUFFER=$value[1,-3]
+        zle accept-line
+    else
+        LBUFFER=$value
+    fi
+
+    zle redisplay
+    typeset -f zle-line-init >/dev/null && zle zle-line-init
+}
+
+zle -N spacezsh.alias.widget
 
 for k (${(k)SPACEZSH_ALIAS_MAPPINGS}); do
     if [[ "$k" =~ '^[a-zA-Z0-9/]+$' ]]; then
-        bindkey -s "${SPACEZSH_LEADER}$k" "${SPACEZSH_ALIAS_MAPPINGS[$k]}"
+        bindkey "${SPACEZSH_LEADER}$k" spacezsh.alias.widget
     else
-        bindkey -s "$k" "${SPACEZSH_ALIAS_MAPPINGS[$k]}"
+        bindkey "$k" spacezsh.alias.widget
     fi
 done
