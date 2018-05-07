@@ -46,6 +46,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'bss' 'brew services start '
     'bse' 'brew services stop '
 
+    'ps' 'ps -ef | ag '
+
     'xa' 'cat _@_ | ag '
     'xb' 'bat _@_\n'
     'xh' 'head _@_ | '
