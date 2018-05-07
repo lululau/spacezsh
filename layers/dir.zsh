@@ -26,7 +26,7 @@ spacezsh.dir.widget() {
 zle     -N   spacezsh.dir.widget
 
 for k (${(k)SPACEZSH_DIR_MAPPINGS}); do
-    if [[ "$k" =~ '^[a-zA-Z0-9]+$' ]]; then
+    if [[ "$k" =~ '^[a-zA-Z0-9/]+$' ]]; then
         bindkey "${SPACEZSH_LEADER}d$k" spacezsh.dir.widget
     else
         bindkey "$k" spacezsh.dir.widget

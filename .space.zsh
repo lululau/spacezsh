@@ -1,9 +1,10 @@
 #!/usr/bin/env zsh
 
-SPACEZSH_LAYERS=(alfred dir emacs fzf)
+SPACEZSH_LAYERS=(alias alfred dir emacs enhanced-vi fzf tmux)
 
 typeset -A SPACEZSH_DIR_MAPPINGS=(
-    'a' /Applications
+    'a' ..
+    'A' /Applications
     'b' ~/bin
     'c' ~/cascode
     'C' ~/Cafe
@@ -12,7 +13,19 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'f' ~/.fzf
     'g' ~/cascode/github.com
     'h' ~
+    'i' ~/Library/Mobile\ Documents/com~apple~CloudDocs
+    'j' ~/cascode/spring/demo
+    'k' ~/kt
+    'm' ~/Movies
+    'o' ~/Documents
+    'p' '=> popd -q'
+    'P' '=> project_root_widget'
+    's' ~/snips
+    't' ~/tmp
+    'T' ~/.tmux
     'v' /Volumes
+    'z' ~/.spacezsh
+    'Z' ~/.oh-my-zsh
     $'\eh' ~
     'm' ~/Movies
     '/' /

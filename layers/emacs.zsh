@@ -65,6 +65,8 @@ fi
 
 bindkey "${SPACEZSH_LEADER}ed" spacezsh.emacs.widget.dired
 bindkey "${SPACEZSH_LEADER}ec" spacezsh.emacs.widget.capture
+bindkey "${SPACEZSH_LEADER}ex" edit-command-line
+bindkey -s "${SPACEZSH_LEADER}es" 'emacs --daemon=term\n'
 
 
 if [[ -z "$SPACEZSH_EMACS_EXT_MAPPINGS" ]]; then
