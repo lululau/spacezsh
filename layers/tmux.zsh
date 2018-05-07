@@ -23,3 +23,5 @@ zle     -N    spacezsh.tmux.widget.selectl
 for k (${(k)SPACEZSH_TMUX_LAYOUT_MAPPINGS}); do
     bindkey "${SPACEZSH_LEADER}t$k" spacezsh.tmux.widget.selectl
 done
+
+bindkey -s "${SPACEZSH_LEADER}tk" 'tmux kill-server\n'
