@@ -59,10 +59,28 @@ spacezsh.emacs.widget.capture() {
 }
 zle     -N    spacezsh.emacs.widget.capture
 
+spacezsh.emacs.widget.search() {
+    setopt localoptions pipefail 2> /dev/null
+    local elisp="(let ((helm-full-frame t)) (dired \"$PWD\") (spacemacs/helm-files-do-ag \"$PWD\"))"
+    if [ "$(uname)" = Darwin ]; then
+      emacsclient -t -s term -e "$elisp"
+    else
+        emacsclient -t -e "$elisp"
+    fi
+    zle redisplay
+    local ret=$?
+    zle reset-prompt
+    typeset -f zle-line-init >/dev/null && zle zle-line-init
+    return $ret
+}
+
+zle -N spacezsh.emacs.widget.search
+
 if [ -n "$SPACEZSH_EMACS_USE_TUI_AS_VISUAL" ]; then
     export VISUAL=spacezsh.emacs.emacsclient-func
 fi
 
+bindkey "${SPACEZSH_LEADER}/" spacezsh.emacs.widget.search
 bindkey "${SPACEZSH_LEADER}ed" spacezsh.emacs.widget.dired
 bindkey "${SPACEZSH_LEADER}ec" spacezsh.emacs.widget.capture
 bindkey "${SPACEZSH_LEADER}ex" edit-command-line
