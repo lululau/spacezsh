@@ -215,15 +215,15 @@ spacezsh.fzf.widget.git-checkout() {
 }
 zle     -N   spacezsh.fzf.widget.git-checkout
 
-bindkey "${SPACEZSH_LEADER}fg" spacezsh.fzf.widget.git-checkout
-bindkey "${SPACEZSH_LEADER}fC" spacezsh.fzf.widget.select-dir-no-recursive
-bindkey "${SPACEZSH_LEADER}ft" spacezsh.fzf.widget.no-recursive
-bindkey "${SPACEZSH_LEADER}fd" spacezsh.fzf.widget.cd
-bindkey "${SPACEZSH_LEADER}fc" spacezsh.fzf.widget.cd-norecursive
-bindkey "${SPACEZSH_LEADER}fj" spacezsh.fzf.widget.auotjump
-bindkey "${SPACEZSH_LEADER}fJ" spacezsh.fzf.widget.select-dir-autojump
-bindkey "${SPACEZSH_LEADER}fo" spacezsh.fzf.widget.capture
-bindkey "${SPACEZSH_LEADER}ff" fzf-file-widget
+bindkey "${SPACEZSH_LEADER}zg" spacezsh.fzf.widget.git-checkout
+bindkey "${SPACEZSH_LEADER}zC" spacezsh.fzf.widget.select-dir-no-recursive
+bindkey "${SPACEZSH_LEADER}zt" spacezsh.fzf.widget.no-recursive
+bindkey "${SPACEZSH_LEADER}zd" spacezsh.fzf.widget.cd
+bindkey "${SPACEZSH_LEADER}zc" spacezsh.fzf.widget.cd-norecursive
+bindkey "${SPACEZSH_LEADER}zj" spacezsh.fzf.widget.auotjump
+bindkey "${SPACEZSH_LEADER}zJ" spacezsh.fzf.widget.select-dir-autojump
+bindkey "${SPACEZSH_LEADER}zo" spacezsh.fzf.widget.capture
+bindkey "${SPACEZSH_LEADER}zf" fzf-file-widget
 
 if [[ -z "$SPACEZSH_FZF_EXT_MAPPINGS" ]]; then
   typeset -A SPACEZSH_FZF_EXT_MAPPINGS=()

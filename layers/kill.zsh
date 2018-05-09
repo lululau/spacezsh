@@ -11,7 +11,9 @@ spacezsh.kill.widget() {
   fzf="$(spacezsh.kill.fzfcmd_complete)"
   matches=$(ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} --min-height 15 --reverse $FZF_DEFAULT_OPTS --preview 'echo {}' --preview-window down:3:wrap $FZF_COMPLETION_OPTS" ${=fzf} -m -e | awk '{print $2}' | tr '\n' ' ')
   if [ -n "$matches" ]; then
-    if [ -n "$LBUFFER" ]; then
+    if [ "$KEYS[-1]" = k ]; then
+        RBUFFER=" $matches"
+    elif [ -n "$LBUFFER" ]; then
         LBUFFER="$LBUFFER$matches"
     else
         LBUFFER="kill $matches"
@@ -24,3 +26,4 @@ spacezsh.kill.widget() {
 zle -N spacezsh.kill.widget
 
 bindkey "${SPACEZSH_LEADER}k" spacezsh.kill.widget
+bindkey "${SPACEZSH_LEADER}K" spacezsh.kill.widget

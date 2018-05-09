@@ -6,8 +6,8 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'a' ..
     'A' /Applications
     'b' ~/bin
-    'c' ~/cascode
-    'C' ~/Cafe
+    'c' ~/.config
+    'C' ~/cascode
     'd' ~/Downloads
     'e' ~/.emacs.d
     'f' ~/.fzf

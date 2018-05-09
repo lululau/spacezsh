@@ -26,3 +26,5 @@ done
 
 bindkey -s "${SPACEZSH_LEADER}tk" 'tmux kill-server\n'
 bindkey -s "${SPACEZSH_LEADER}tl" 'tmux list-sessions\n'
+bindkey "${SPACEZSH_LEADER}t;" tmux-pane-words-prefix
+bindkey "${SPACEZSH_LEADER};" tmux-pane-words-prefix

@@ -15,7 +15,6 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     $'\ela' 'la\n'
 
     # ssh-dialog
-    'ss' 'ss\n'
     $'\es' 'ss\n'
 
     # git
@@ -40,21 +39,97 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'bu' 'brew update && brew outdated\n'
     'bU' 'brew upgrade && brew cleanup\n'
     'bi' 'brew info '
+    'be' 'brew edit '
     'bl' 'brew list\n'
+    'bs' 'brew search '
     'b/' 'brew list | ag '
-    'bsl' 'brew services list\n'
-    'bss' 'brew services start '
-    'bse' 'brew services stop '
 
+    # rvm
+    'rl' 'rvm list\n'
+    'rL' 'rvm list known\n'
+    'r1' 'rvm use 1.8\n'
+    'r2' 'rvm use 2.2\n'
+    'r3' 'rvm use 2.3\n'
+    'r4' 'rvm use 2.4\n'
+    'r5' 'rvm use 2.5\n'
+    'rs' 'rvm use system\n'
+    'rd' 'rvm use default\n'
+    'ru' 'rvm get master\n'
+
+    # spring gem
+    'spl' 'spring status\n'
+    'sps' 'spring rails runner 1\n'
+    'spe' 'spring stop\n'
+
+    # Maven / Mina
+    'mdd' 'mina deploy '
+    'mds' 'mina deploy stage=staging '
+    'mdp' 'mina deploy stage=production '
+    'mc' 'mvn compile\n'
+    'mC' 'mvn clean\n'
+    'mp' 'mvn package -Dmaven.test.skip=true\n'
+    'msr' 'mvn spring-boot:run\n'
+    'msj' 'mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentpath:/usr/local/jrebel/lib/libjrebel64.dylib"\n'
+    'mr' 'mvn dependency:resolve\n'
+    'mi' 'mvn install\n'
+    'mx' 'mvn exec:java -Dexec.mainClass='
+
+    # Install various packages
+    'ib' 'brew install '
+    'ig' 'gem install '
+    'in' 'npm install '
+    'ip' 'pip install --user '
+    'ia' 'sudo apt-get install '
+    'iy' 'sudo yum install '
+
+    # Sys Admin
+    'sL' "$([ $(uname) = Linux ] && echo 'sudo systemctl list-units | grep ' || echo 'brew services list\\n')"
+    'sl' "$([ $(uname) = Linux ] && echo 'sudo systemctl status ' || echo 'brew services list | ag ')"
+    'ss' "$([ $(uname) = Linux ] && echo 'sudo systemctl start ' || echo 'brew services start ')"
+    'se' "$([ $(uname) = Linux ] && echo 'sudo systemctl stop ' || echo 'brew services stop ')"
+    'sr' "$([ $(uname) = Linux ] && echo 'sudo systemctl restart ' || echo 'brew services restart ')"
+    'pi' 'ping '
     'ps' 'ps -ef | ag '
+    'rc' 'rsync -az --progress --delete'
+    'ns' 'nslookup '
+    'tr' 'traceroute '
+    'su' 'sudo _@_'
+    'le' '_@_ | less'
+    'co' "chown -R $USER.$(groups|cut -d' ' -f1) _@_"
+    'cO' 'chown -R root.root _@_ '
+    '+x' 'chmod +x _@_'
+    'te' 'tree -N\n'
 
-    'xa' 'cat _@_ | ag '
-    'xb' 'bat _@_\n'
-    'xh' 'head _@_ | '
-    'xi' 'cat _@_ | iconv -f GBK '
-    'xI' 'head _@_ | iconv -f GBK '
-    'xt' 'tail -f _@_\n'
-    'xw' 'wc -l _@_\n'
+    # Trash
+    'Tl' 'mm -l\n'
+    'Te' 'mm -e\n'
+
+    # Perl
+    'sm' "_@_ | perl -lne '\$s+=\$_;END{print "\$s"}' "
+    'pe' '_@_ | perl -e '
+    'pp' '_@_ | perl -pe '
+    'pn' '_@_ | perl -ne '
+    'pa' '_@_ | perl -F"" -alne '
+
+    # Files
+    'ff' 'find . -name '
+    'fF' 'mfd -o . '
+    'f/' '_@_ | ag '
+    'fe' 'ee _@_\n'
+    'fE' 'see _@_\n'
+    'fb' 'bat _@_\n'
+    'fc' 'cat _@_'
+    'fh' '_@_ | head'
+    'fi' '_@_ | iconv -f GBK '
+    'ft' 'tail -f _@_\n'
+    'wl' '_@_ | wc -l '
+    'wc' '_@_ | wc -c '
+    'jq' '_@_ | jq .'
+    'fD' 'rm -r _@_'
+    'fT' 'mm _@_\n'
+    'fR' 'mv _@_ '
+    'fC' 'cp -a _@_ '
+    'od' '_@_ | od -Ad -tx'
 )
 
 function spacezsh.alias.widget() {
