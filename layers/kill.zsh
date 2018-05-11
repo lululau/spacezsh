@@ -19,11 +19,12 @@ spacezsh.kill.widget() {
         LBUFFER="kill $matches"
     fi
   fi
+  zle -K main
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
 }
 
 zle -N spacezsh.kill.widget
 
-bindkey "${SPACEZSH_LEADER}k" spacezsh.kill.widget
-bindkey "${SPACEZSH_LEADER}K" spacezsh.kill.widget
+bindkey -M SPACEZSH_KEYMAP "k" spacezsh.kill.widget
+bindkey -M SPACEZSH_KEYMAP "K" spacezsh.kill.widget

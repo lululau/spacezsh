@@ -130,16 +130,16 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'fR' 'mv _@_ '
     'fC' 'cp -a _@_ '
     'od' '_@_ | od -Ad -tx'
+
+    # Aliases in other layers
+    'es' 'emacs --daemon=term\n'
+    'tk' 'tmux kill-server\n'
+    'tl' 'tmux list-sessions\nano'
 )
 
 function spacezsh.alias.widget() {
     local args=(${(z)BUFFER})
-    if [[ "${KEYS[1,2]}" = "$SPACEZSH_LEADER" ]]; then
-      local key=$KEYS[3,-1]
-    else
-        local key=$KEYS
-    fi
-    local value=$SPACEZSH_ALIAS_MAPPINGS[$key]
+    local value=$SPACEZSH_ALIAS_MAPPINGS[$KEYS]
     if [[ "$value" =~ _@_ ]]; then
       value=${value//_@_/$BUFFER}
     else
@@ -159,6 +159,7 @@ function spacezsh.alias.widget() {
         LBUFFER=$value
     fi
 
+    zle -K main
     zle redisplay
     typeset -f zle-line-init >/dev/null && zle zle-line-init
 }
@@ -166,8 +167,8 @@ function spacezsh.alias.widget() {
 zle -N spacezsh.alias.widget
 
 for k (${(k)SPACEZSH_ALIAS_MAPPINGS}); do
-    if [[ "$k" =~ '^[a-zA-Z0-9/]+$' ]]; then
-        bindkey "${SPACEZSH_LEADER}$k" spacezsh.alias.widget
+    if [[ "$k" =~ '^[a-zA-Z0-9/]' ]]; then
+        bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
     else
         bindkey "$k" spacezsh.alias.widget
     fi

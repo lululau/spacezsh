@@ -10,6 +10,7 @@ function spacezsh.nnn.n() {
 }
 
 spacezsh.nnn.widget() {
+    zle -K main
     setopt localoptions pipefail 2> /dev/null
     spacezsh.nnn.n <>/dev/tty
     zle redisplay
@@ -20,7 +21,7 @@ spacezsh.nnn.widget() {
 }
 zle     -N    spacezsh.nnn.widget
 
-bindkey "${SPACEZSH_LEADER}n" spacezsh.nnn.widget
+bindkey -M SPACEZSH_KEYMAP "n" spacezsh.nnn.widget
 
 
 if [[ -z "$SPACEZSH_NNN_EXT_MAPPINGS" ]]; then

@@ -9,6 +9,7 @@ typeset -A SPACEZSH_TMUX_LAYOUT_MAPPINGS=(
 )
 
 spacezsh.tmux.widget.selectl() {
+    zle -K main
     local key=$KEYS[-1]
     local value=$SPACEZSH_TMUX_LAYOUT_MAPPINGS[$key]
     tmux selectl $value
@@ -24,7 +25,5 @@ for k (${(k)SPACEZSH_TMUX_LAYOUT_MAPPINGS}); do
     bindkey "${SPACEZSH_LEADER}t$k" spacezsh.tmux.widget.selectl
 done
 
-bindkey -s "${SPACEZSH_LEADER}tk" 'tmux kill-server\n'
-bindkey -s "${SPACEZSH_LEADER}tl" 'tmux list-sessions\n'
-bindkey "${SPACEZSH_LEADER}t;" tmux-pane-words-prefix
-bindkey "${SPACEZSH_LEADER};" tmux-pane-words-prefix
+bindkey -M SPACEZSH_KEYMAP "t;" tmux-pane-words-prefix
+bindkey -M SPACEZSH_KEYMAP ";" tmux-pane-words-prefix

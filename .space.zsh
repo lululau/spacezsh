@@ -65,4 +65,5 @@ typeset -A SPACEZSH_NNN_EXT_MAPPINGS=(
     $'\en' spacezsh.nnn.widget
 )
 
+SPACEZSH_BARE_SPACE_ENABLED=true
 source $HOME/.spacezsh/init.zsh

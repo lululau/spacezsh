@@ -7,6 +7,7 @@ spacezsh.fzf.func.no-recursive() {
     ls -atrp | perl -ne 'print unless /^\.\.?\/$/' | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_T_OPTS" $(__fzfcmd) -m "$@" | while read item; do
         echo -n "${(q)item} "
     done
+    zle -K main
     local ret=$?
     echo
     return $ret
@@ -14,6 +15,7 @@ spacezsh.fzf.func.no-recursive() {
 
 spacezsh.fzf.widget.no-recursive() {
     LBUFFER="${LBUFFER}$(spacezsh.fzf.func.no-recursive)"
+    zle -K main
     local ret=$?
     zle redisplay
     typeset -f zle-line-init >/dev/null && zle zle-line-init
@@ -33,6 +35,7 @@ spacezsh.fzf.widget.cd() {
     return 0
   fi
   cd "$dir"
+  zle -K main
   local ret=$?
   zle reset-prompt
   typeset -f zle-line-init >/dev/null && zle zle-line-init
@@ -50,6 +53,7 @@ zle     -N    spacezsh.fzf.widget.cd
 #         zle redisplay
 #         return 0
 #     fi
+#     zle -K main
 #     cd "$dir"
 #     local ret=$?
 #     zle reset-prompt
@@ -59,6 +63,7 @@ zle     -N    spacezsh.fzf.widget.cd
 # }
 
 spacezsh.fzf.widget.cd-norecursive() {
+    zle -K main
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
     local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'enter:execute(echo)+accept,alt-enter:accept,alt-a:execute(echo cd ..)+accept,alt-p:execute(echo popd -q)+accept,alt-h:execute(echo cd __HOME_IN_FZF__)+accept,alt-/:execute(echo cd __ROOT_IN_FZF__)+accept,alt-o:execute(echo cd -)+accept,space:execute(echo exit)+accept')"
@@ -104,6 +109,7 @@ spacezsh.fzf.widget.cd-norecursive() {
 zle     -N    spacezsh.fzf.widget.cd-norecursive
 
 spacezsh.fzf.widget.select-dir-no-recursive() {
+    zle -K main
     local old_pwd=$PWD
     local old_lbuffer=$LBUFFER
     local FZF_HEIGHT=90%
@@ -152,6 +158,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
 zle     -N    spacezsh.fzf.widget.select-dir-no-recursive
 
 spacezsh.fzf.widget.auotjump() {
+    zle -K main
     local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
     setopt localoptions pipefail 2> /dev/null
     local tac_cmd=tac
@@ -174,6 +181,7 @@ spacezsh.fzf.widget.auotjump() {
 zle     -N   spacezsh.fzf.widget.auotjump
 
 spacezsh.fzf.widget.select-dir-autojump() {
+    zle -K main
     local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
     local tac_cmd=tac
     if [ $(uname) = Darwin ]; then
@@ -185,6 +193,7 @@ spacezsh.fzf.widget.select-dir-autojump() {
 zle     -N   spacezsh.fzf.widget.select-dir-autojump
 
 spacezsh.fzf.widget.capture() {
+    zle -K main
     local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
     if [ -n "$TMUX" ]; then
       capture_cmd='tmux capture-pane -pS -'
@@ -200,6 +209,7 @@ spacezsh.fzf.widget.capture() {
 zle     -N   spacezsh.fzf.widget.capture
 
 spacezsh.fzf.widget.git-checkout() {
+    zle -K main
     local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
     setopt localoptions pipefail 2> /dev/null
     local branch=$(git branch | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" $(__fzfcmd) +m | sed "s#.* ##")
@@ -215,15 +225,15 @@ spacezsh.fzf.widget.git-checkout() {
 }
 zle     -N   spacezsh.fzf.widget.git-checkout
 
-bindkey "${SPACEZSH_LEADER}zg" spacezsh.fzf.widget.git-checkout
-bindkey "${SPACEZSH_LEADER}zC" spacezsh.fzf.widget.select-dir-no-recursive
-bindkey "${SPACEZSH_LEADER}zt" spacezsh.fzf.widget.no-recursive
-bindkey "${SPACEZSH_LEADER}zd" spacezsh.fzf.widget.cd
-bindkey "${SPACEZSH_LEADER}zc" spacezsh.fzf.widget.cd-norecursive
-bindkey "${SPACEZSH_LEADER}zj" spacezsh.fzf.widget.auotjump
-bindkey "${SPACEZSH_LEADER}zJ" spacezsh.fzf.widget.select-dir-autojump
-bindkey "${SPACEZSH_LEADER}zo" spacezsh.fzf.widget.capture
-bindkey "${SPACEZSH_LEADER}zf" fzf-file-widget
+bindkey -M SPACEZSH_KEYMAP "zg" spacezsh.fzf.widget.git-checkout
+bindkey -M SPACEZSH_KEYMAP "zC" spacezsh.fzf.widget.select-dir-no-recursive
+bindkey -M SPACEZSH_KEYMAP "zt" spacezsh.fzf.widget.no-recursive
+bindkey -M SPACEZSH_KEYMAP "zd" spacezsh.fzf.widget.cd
+bindkey -M SPACEZSH_KEYMAP "zc" spacezsh.fzf.widget.cd-norecursive
+bindkey -M SPACEZSH_KEYMAP "zj" spacezsh.fzf.widget.auotjump
+bindkey -M SPACEZSH_KEYMAP "zJ" spacezsh.fzf.widget.select-dir-autojump
+bindkey -M SPACEZSH_KEYMAP "zo" spacezsh.fzf.widget.capture
+bindkey -M SPACEZSH_KEYMAP "zf" fzf-file-widget
 
 if [[ -z "$SPACEZSH_FZF_EXT_MAPPINGS" ]]; then
   typeset -A SPACEZSH_FZF_EXT_MAPPINGS=()
