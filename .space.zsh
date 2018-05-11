@@ -9,27 +9,29 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'c' ~/.config
     'C' ~/cascode
     'd' ~/Downloads
+    'D' ~/Documents
     'e' ~/.emacs.d
     'f' ~/.fzf
     'g' ~/cascode/github.com
     'h' ~
+    'H' /home
     'i' ~/Library/Mobile\ Documents/com~apple~CloudDocs
     'j' ~/cascode/spring/demo
     'k' ~/kt
     'l' ~/Library/Application\ Support
     'L' ~/Library/Preferences
     'm' ~/Movies
-    'o' ~/Documents
     'p' '=> popd -q'
     'P' '=> project_root_widget'
     'r' ~/.tmux-resurrect
-    's' ~/.spacezsh
+    's' ~/Documents/scratches
     'S' ~/snips
     't' ~/tmp
     'T' ~/.tmux
     'v' /Volumes
     'z' ~/.spacezsh
     'Z' ~/.oh-my-zsh
+    'v' /Volumes
     $'\eh' ~
     'm' ~/Movies
     '/' /
