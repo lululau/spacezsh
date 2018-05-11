@@ -5,17 +5,13 @@ if [[ -z "$SPACEZSH_DIR_MAPPINGS" ]]; then
 fi
 
 spacezsh.dir.widget() {
-    if [[ "${KEYS[1,2]}" = "$SPACEZSH_LEADER" ]]; then
-        local key=$KEYS[-1]
-    else
-        local key=$KEYS
-    fi
-    local value=$SPACEZSH_DIR_MAPPINGS[$key]
+    local value=$SPACEZSH_DIR_MAPPINGS[${KEYS#d}]
     if [[ "$value" =~ '^=> ' ]]; then
         eval ${value#=> }
     else
         cd "$value"
     fi
+    zle -K main
     local ret=$?
     zle reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
@@ -27,7 +23,7 @@ zle     -N   spacezsh.dir.widget
 
 for k (${(k)SPACEZSH_DIR_MAPPINGS}); do
     if [[ "$k" =~ '^[a-zA-Z0-9/]+$' ]]; then
-        bindkey "${SPACEZSH_LEADER}d$k" spacezsh.dir.widget
+        bindkey -M SPACEZSH_KEYMAP "d$k" spacezsh.dir.widget
     else
         bindkey "$k" spacezsh.dir.widget
     fi

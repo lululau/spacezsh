@@ -18,6 +18,7 @@ spacezsh.emacs.widget.dired() {
     if [ -e ${~dir} ]; then
         cd ${~dir}
     fi
+    zle -K main
     zle redisplay
     local ret=$?
     zle reset-prompt
@@ -51,6 +52,7 @@ spacezsh.emacs.widget.capture() {
 
     rm "$tmpfile"
 
+    zle -K main
     zle redisplay
     local ret=$?
     zle reset-prompt
@@ -67,6 +69,7 @@ spacezsh.emacs.widget.search() {
     else
         emacsclient -t -e "$elisp"
     fi
+    zle -K main
     zle redisplay
     local ret=$?
     zle reset-prompt
@@ -80,11 +83,12 @@ if [ -n "$SPACEZSH_EMACS_USE_TUI_AS_VISUAL" ]; then
     export VISUAL=spacezsh.emacs.emacsclient-func
 fi
 
-bindkey "${SPACEZSH_LEADER}/" spacezsh.emacs.widget.search
-bindkey "${SPACEZSH_LEADER}ed" spacezsh.emacs.widget.dired
-bindkey "${SPACEZSH_LEADER}ec" spacezsh.emacs.widget.capture
-bindkey "${SPACEZSH_LEADER}ex" edit-command-line
-bindkey -s "${SPACEZSH_LEADER}es" 'emacs --daemon=term\n'
+bindkey -M SPACEZSH_KEYMAP "/" spacezsh.emacs.widget.search
+bindkey -M SPACEZSH_KEYMAP "ed" spacezsh.emacs.widget.dired
+bindkey -M SPACEZSH_KEYMAP "x" spacezsh.emacs.widget.dired
+bindkey -M SPACEZSH_KEYMAP "ec" spacezsh.emacs.widget.capture
+bindkey -M SPACEZSH_KEYMAP "eo" spacezsh.emacs.widget.capture
+bindkey -M SPACEZSH_KEYMAP "ex" edit-command-line
 
 
 if [[ -z "$SPACEZSH_EMACS_EXT_MAPPINGS" ]]; then
