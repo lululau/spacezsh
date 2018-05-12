@@ -73,7 +73,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'msj' 'mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentpath:/usr/local/jrebel/lib/libjrebel64.dylib"\n'
     'mr' 'mvn dependency:resolve\n'
     'mi' 'mvn install\n'
-    'mx' 'mvn exec:java -Dexec.mainClass='
+    'mx' 'mvn exec:java -Dexec.mainClass= '
 
     # Install various packages
     'ib' 'brew install '
@@ -91,14 +91,14 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'sr' "$([ $(uname) = Linux ] && echo 'sudo systemctl restart ' || echo 'brew services restart ')"
     'pi' 'ping '
     'ps' 'ps -ef | ag '
-    'rc' 'rsync -az --progress --delete'
+    'rc' 'rsync -az --progress --delete '
     'ns' 'nslookup '
     'tr' 'traceroute '
     'su' 'sudo _@_'
-    'le' '_@_ | less'
-    'co' "chown -R $USER.$(groups|cut -d' ' -f1) _@_"
+    'le' '_@_ | less '
+    'co' "chown -R $USER.$(groups|cut -d' ' -f1) _@_ "
     'cO' 'chown -R root.root _@_ '
-    '+x' 'chmod +x _@_'
+    '+x' 'chmod +x _@_ '
     'te' 'tree -N\n'
 
     # Trash
@@ -120,17 +120,17 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'fE' 'see _@_\n'
     'fb' 'bat _@_\n'
     'fc' 'cat _@_'
-    'fh' '_@_ | head'
+    'fh' '_@_ | head '
     'fi' '_@_ | iconv -f GBK '
     'ft' 'tail -f _@_\n'
     'wl' '_@_ | wc -l '
     'wc' '_@_ | wc -c '
-    'jq' '_@_ | jq .'
-    'fD' 'rm -r _@_'
+    'jq' '_@_ | jq . '
+    'fD' 'rm -r _@_ '
     'fT' 'mm _@_\n'
     'fR' 'mv _@_ '
     'fC' 'cp -a _@_ '
-    'od' '_@_ | od -Ad -tx'
+    'od' '_@_ | od -Ad -tc '
 
     # Aliases in other layers
     'es' 'emacs --daemon=term\n'

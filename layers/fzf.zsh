@@ -14,7 +14,7 @@ spacezsh.fzf.func.no-recursive() {
 }
 
 spacezsh.fzf.widget.no-recursive() {
-    LBUFFER="${LBUFFER}$(spacezsh.fzf.func.no-recursive)"
+    LBUFFER="${LBUFFER}$(spacezsh.fzf.func.no-recursive) "
     zle -K main
     local ret=$?
     zle redisplay
@@ -89,7 +89,7 @@ spacezsh.fzf.widget.cd-norecursive() {
     elif [[ "$res" = $'exit\n'* ]]; then
       cd "${res#$'exit\n'}"
     else
-      LBUFFER="${LBUFFER}${(q)file}"
+      LBUFFER="${LBUFFER}${(q)file} "
       omz_termsupport_precmd
       zle reset-prompt
       return 0
@@ -135,7 +135,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
     elif [[ "$res" = $'cd -'* ]]; then
       cd -
     else
-      LBUFFER="${LBUFFER}$(echo ${file:a} | sed 's/^/'\''/;s/$/'\''/')"
+      LBUFFER="${LBUFFER}$(echo ${file:a} | sed 's/^/'\''/;s/$/'\''/') "
       zle reset-prompt
       return 0
     fi
@@ -148,7 +148,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
       quit_pwd=$PWD
       cd "$old_pwd"
       if [ "$LBUFFER" = "$old_lbuffer" ]; then
-        LBUFFER="${LBUFFER}$(echo ${quit_pwd:a} | sed 's/^/'\''/;s/$/'\''/')"
+        LBUFFER="${LBUFFER}$(echo ${quit_pwd:a} | sed 's/^/'\''/;s/$/'\''/') "
       fi
       zle reset-prompt
       typeset -f zle-line-init >/dev/null && zle zle-line-init
@@ -187,7 +187,7 @@ spacezsh.fzf.widget.select-dir-autojump() {
     if [ $(uname) = Darwin ]; then
       tac_cmd=gtac
     fi
-    LBUFFER="${LBUFFER}$({dirs -pl; autojump -s | sed -n '/^_______/!p; /^_______/q' | $tac_cmd  | cut -d$'\t' -f2; } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" $(__fzfcmd) +m | sed "s#^#'#;s#\$#'#")"
+    LBUFFER="${LBUFFER}$({dirs -pl; autojump -s | sed -n '/^_______/!p; /^_______/q' | $tac_cmd  | cut -d$'\t' -f2; } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" $(__fzfcmd) +m | sed "s#^#'#;s#\$#'#") "
     zle redisplay
 }
 zle     -N   spacezsh.fzf.widget.select-dir-autojump
@@ -203,7 +203,7 @@ spacezsh.fzf.widget.capture() {
     else
       capture_cmd='echo'
     fi
-    LBUFFER="${LBUFFER}$(eval "$capture_cmd" | perl -00 -pe 1 | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_O_OPTS" $(__fzfcmd) +m --tac | sed "s#^➜ *##;s#^#'#;s#\$#'#")"
+    LBUFFER="${LBUFFER}$(eval "$capture_cmd" | perl -00 -pe 1 | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_O_OPTS" $(__fzfcmd) +m --tac | sed "s#^➜ *##;s#^#'#;s#\$#'#") "
     zle redisplay
 }
 zle     -N   spacezsh.fzf.widget.capture
