@@ -131,6 +131,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'fR' 'mv _@_ '
     'fC' 'cp -a _@_ '
     'od' '_@_ | od -Ad -tc '
+    'fl' 'l -d _@_\n'
+    'lv' 'lnav _@_ '
 
     # Aliases in other layers
     'es' 'emacs --daemon=term\n'
