@@ -96,8 +96,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'tr' 'traceroute '
     'su' 'sudo _@_'
     'le' '_@_ | less '
-    'co' "chown -R $USER.$(groups|cut -d' ' -f1) _@_ "
-    'cO' 'chown -R root.root _@_ '
+    'ow' "chown -R $USER.$(groups|cut -d' ' -f1) _@_ "
+    'oW' 'chown -R root.root _@_ '
     '+x' 'chmod +x _@_ '
     'te' 'tree -N\n'
 
@@ -125,7 +125,6 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'ft' 'tail -f _@_\n'
     'wl' '_@_ | wc -l '
     'wc' '_@_ | wc -c '
-    'jq' '_@_ | jq . '
     'fD' 'rm -r _@_ '
     'fT' 'mm _@_\n'
     'fR' 'mv _@_ '

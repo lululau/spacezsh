@@ -231,7 +231,9 @@ bindkey -M SPACEZSH_KEYMAP "zT" spacezsh.fzf.widget.no-recursive
 bindkey -M SPACEZSH_KEYMAP "zd" spacezsh.fzf.widget.cd
 bindkey -M SPACEZSH_KEYMAP "zx" spacezsh.fzf.widget.cd
 bindkey -M SPACEZSH_KEYMAP "zc" spacezsh.fzf.widget.cd-norecursive
+bindkey -M SPACEZSH_KEYMAP "c" spacezsh.fzf.widget.cd-norecursive
 bindkey -M SPACEZSH_KEYMAP "zj" spacezsh.fzf.widget.auotjump
+bindkey -M SPACEZSH_KEYMAP "j" spacezsh.fzf.widget.auotjump
 bindkey -M SPACEZSH_KEYMAP "zJ" spacezsh.fzf.widget.select-dir-autojump
 bindkey -M SPACEZSH_KEYMAP "zo" spacezsh.fzf.widget.capture
 bindkey -M SPACEZSH_KEYMAP "zf" fzf-file-widget
