@@ -239,6 +239,12 @@ spacezsh.fzf.widget.tmux_attach_session() {
 }
 zle     -N    spacezsh.fzf.widget.tmux_attach_session
 
+spacezsh.fzf.widget.fzf-file-widget-wrapper() {
+  zle -K main
+  zle fzf-file-widget
+}
+zle     -N   spacezsh.fzf.widget.fzf-file-widget-wrapper
+
 bindkey -M SPACEZSH_KEYMAP "zg" spacezsh.fzf.widget.git-checkout
 bindkey -M SPACEZSH_KEYMAP "zC" spacezsh.fzf.widget.select-dir-no-recursive
 bindkey -M SPACEZSH_KEYMAP "zT" spacezsh.fzf.widget.no-recursive
@@ -250,9 +256,9 @@ bindkey -M SPACEZSH_KEYMAP "zj" spacezsh.fzf.widget.auotjump
 bindkey -M SPACEZSH_KEYMAP "j" spacezsh.fzf.widget.auotjump
 bindkey -M SPACEZSH_KEYMAP "zJ" spacezsh.fzf.widget.select-dir-autojump
 bindkey -M SPACEZSH_KEYMAP "zo" spacezsh.fzf.widget.capture
-bindkey -M SPACEZSH_KEYMAP "zf" fzf-file-widget
-bindkey -M SPACEZSH_KEYMAP "zt" fzf-file-widget
 bindkey -M SPACEZSH_KEYMAP "ta" spacezsh.fzf.widget.tmux_attach_session
+bindkey -M SPACEZSH_KEYMAP "zf" spacezsh.fzf.widget.fzf-file-widget-wrapper
+bindkey -M SPACEZSH_KEYMAP "zt" spacezsh.fzf.widget.fzf-file-widget-wrapper
 
 if [[ -z "$SPACEZSH_FZF_EXT_MAPPINGS" ]]; then
   typeset -A SPACEZSH_FZF_EXT_MAPPINGS=()
