@@ -225,6 +225,20 @@ spacezsh.fzf.widget.git-checkout() {
 }
 zle     -N   spacezsh.fzf.widget.git-checkout
 
+spacezsh.fzf.widget.tmux_attach_session() {
+  zle -K main
+  local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
+  setopt localoptions pipefail 2> /dev/null
+  local session=$(tmux list-sessions -F '#S' | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" $(__fzfcmd) +m)
+  if [[ -z "$session" ]]; then
+    zle redisplay
+    return 0
+  fi
+  BUFFER="tmux attach -t $session"
+  zle accept-line
+}
+zle     -N    spacezsh.fzf.widget.tmux_attach_session
+
 bindkey -M SPACEZSH_KEYMAP "zg" spacezsh.fzf.widget.git-checkout
 bindkey -M SPACEZSH_KEYMAP "zC" spacezsh.fzf.widget.select-dir-no-recursive
 bindkey -M SPACEZSH_KEYMAP "zT" spacezsh.fzf.widget.no-recursive
@@ -238,6 +252,7 @@ bindkey -M SPACEZSH_KEYMAP "zJ" spacezsh.fzf.widget.select-dir-autojump
 bindkey -M SPACEZSH_KEYMAP "zo" spacezsh.fzf.widget.capture
 bindkey -M SPACEZSH_KEYMAP "zf" fzf-file-widget
 bindkey -M SPACEZSH_KEYMAP "zt" fzf-file-widget
+bindkey -M SPACEZSH_KEYMAP "ta" spacezsh.fzf.widget.tmux_attach_session
 
 if [[ -z "$SPACEZSH_FZF_EXT_MAPPINGS" ]]; then
   typeset -A SPACEZSH_FZF_EXT_MAPPINGS=()
