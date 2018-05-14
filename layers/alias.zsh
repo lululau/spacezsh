@@ -125,6 +125,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'ft' 'tail -f _@_\n'
     'wl' '_@_ | wc -l '
     'wc' '_@_ | wc -c '
+    'fo' 'open _@_\n'
+    'fp' 'preview _@_\n'
     'fD' 'rm -r _@_ '
     'fT' 'mm _@_\n'
     'fR' 'mv _@_ '
