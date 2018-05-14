@@ -91,7 +91,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'sr' "$([ $(uname) = Linux ] && echo 'sudo systemctl restart ' || echo 'brew services restart ')"
     'pi' 'ping '
     'ps' 'ps -ef | ag '
-    'rc' 'rsync -az --progress --delete '
+    'rc' 'rsync -az --progress --delete _@_ '
     'ns' 'nslookup '
     'tr' 'traceroute '
     'su' 'sudo _@_'
@@ -136,10 +136,11 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'lv' 'lnav _@_ '
 
     # Aliases in other layers
-    'es' 'emacs --daemon=term\n'
     'tk' 'tmux kill-server\n'
     'tl' 'tmux list-sessions\n'
 )
+
+SPACEZSH_ALIAS_MAPPINGS[es]="emacs --daemon$([ $(uname) = Darwin ] && echo '=term')\\n"
 
 function spacezsh.alias.widget() {
     local args=(${(z)BUFFER})
