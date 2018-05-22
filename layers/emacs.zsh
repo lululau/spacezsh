@@ -90,11 +90,6 @@ bindkey -M SPACEZSH_KEYMAP "ec" spacezsh.emacs.widget.capture
 bindkey -M SPACEZSH_KEYMAP "eo" spacezsh.emacs.widget.capture
 bindkey -M SPACEZSH_KEYMAP "ex" edit-command-line
 
-
-if [[ -z "$SPACEZSH_EMACS_EXT_MAPPINGS" ]]; then
-  typeset -A SPACEZSH_EMACS_EXT_MAPPINGS=()
-fi
-
 for k (${(k)SPACEZSH_EMACS_EXT_MAPPINGS}); do
     bindkey "$k" "$SPACEZSH_EMACS_EXT_MAPPINGS[$k]"
 done

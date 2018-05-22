@@ -41,7 +41,6 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     $'\ep' '=> popd -q'
 )
 
-SPACEZSH_EMACS_USE_TUI_AS_VISUAL=1
 typeset -A SPACEZSH_EMACS_EXT_MAPPINGS=(
     $'\ex' spacezsh.emacs.widget.dired
     $'\eO' spacezsh.emacs.widget.capture
