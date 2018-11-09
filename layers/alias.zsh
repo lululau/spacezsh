@@ -72,6 +72,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'msr' 'mvn spring-boot:run\n'
     'msj' 'mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentpath:/usr/local/jrebel/lib/libjrebel64.dylib"\n'
     'mr' 'mvn dependency:resolve\n'
+    'mt' 'mvn dependency:tree | less\n'
     'mi' 'mvn install\n'
     'mx' 'mvn exec:java -Dexec.mainClass= '
 
@@ -126,6 +127,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'wl' '_@_ | wc -l '
     'wc' '_@_ | wc -c '
     'fo' 'open _@_\n'
+    'f.' 'open .\n'
     'fp' 'preview _@_\n'
     'fD' 'rm -r _@_ '
     'fT' 'mm _@_\n'
