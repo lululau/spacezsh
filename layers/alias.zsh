@@ -140,6 +140,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     # Aliases in other layers
     'tk' 'tmux kill-server\n'
     'tl' 'tmux list-sessions\n'
+
+    $'\x7f' 'echo saas\n'
 )
 
 SPACEZSH_ALIAS_MAPPINGS[es]="emacs --daemon$([ $(uname) = Darwin ] && echo '=term')\\n"
@@ -149,6 +151,8 @@ function spacezsh.alias.widget() {
     local value=$SPACEZSH_ALIAS_MAPPINGS[$KEYS]
     if [[ "$value" =~ _@_ ]]; then
       value=${value//_@_/$BUFFER}
+    elif [[ "$KEYS" = $'\x7f' ]]; then
+      value=${BUFFER%|*}
     else
         for i ({1..10}); do
             if [[ "$value" =~ _$i_ ]]; then
@@ -176,6 +180,8 @@ zle -N spacezsh.alias.widget
 for k (${(k)SPACEZSH_ALIAS_MAPPINGS}); do
     if [[ "$k" =~ '^[a-zA-Z0-9/]' ]]; then
         bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
+    elif [[ "$k" = $'\x7f' ]]; then
+          bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
     else
         bindkey "$k" spacezsh.alias.widget
     fi
