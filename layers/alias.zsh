@@ -100,7 +100,11 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'ow' "chown -R $USER.$(groups|cut -d' ' -f1) _@_ "
     'oW' 'chown -R root.root _@_ '
     '+x' 'chmod +x _@_ '
-    'te' 'tree -N\n'
+    'te' 'tree -NC\n'
+    'mm' 'sudo PAGER=mitmproxy-viewer mitmproxy -m transparent --showhost\n'
+    'mM' 'PAGER=mitmproxy-viewer mitmproxy --showhost\n'
+    'tp' 'sudo toggle-pf all\n'
+    'tP' 'sudo toggle-pf\n'
 
     # Trash
     'Tl' 'mm -l\n'
