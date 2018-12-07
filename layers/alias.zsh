@@ -121,6 +121,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'ff' 'find . -name '
     'fF' 'mfd -o . '
     'f/' '_@_ | ag '
+    'ag' '_@_ | ag '
     'fe' 'ee _@_\n'
     'fE' 'see _@_\n'
     'fb' 'bat _@_\n'
