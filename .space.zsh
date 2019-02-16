@@ -27,7 +27,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     's' ~/Documents/scratches
     'S' ~/snips
     't' ~/tmp
-    'T' ~/.tmux
+    'T' ~/.Trash
     'v' /Volumes
     'z' ~/.spacezsh
     'Z' ~/.oh-my-zsh
