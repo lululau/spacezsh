@@ -53,6 +53,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'r3' 'rvm use 2.3\n'
     'r4' 'rvm use 2.4\n'
     'r5' 'rvm use 2.5\n'
+    'r6' 'rvm use 2.6\n'
     'rs' 'rvm use system\n'
     'rd' 'rvm use default\n'
     'ru' 'rvm get master\n'
