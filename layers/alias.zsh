@@ -106,6 +106,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'mM' 'PAGER=mitmproxy-viewer mitmproxy --showhost\n'
     'tp' 'sudo toggle-pf all\n'
     'tP' 'sudo toggle-pf\n'
+    'of' 'lsof -np _@_'
 
     # Trash
     'Tl' 'trash -l\n'
