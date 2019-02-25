@@ -45,3 +45,5 @@ fi
 for layer in "$SPACEZSH_LAYERS[@]"; do
     source "$SPACEZSH_HOME/layers/$layer.zsh"
 done
+
+source "$SPACEZSH_HOME/help.zsh"
