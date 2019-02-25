@@ -108,8 +108,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'tP' 'sudo toggle-pf\n'
 
     # Trash
-    'Tl' 'mm -l\n'
-    'Te' 'mm -e\n'
+    'Tl' 'trash -l\n'
+    'Te' 'trash -e\n'
 
     # Perl
     'sm' "_@_ | perl -lne '\$s+=\$_;END{print "\$s"}' "
