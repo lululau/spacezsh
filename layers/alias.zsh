@@ -184,7 +184,7 @@ function spacezsh.alias.widget() {
 zle -N spacezsh.alias.widget
 
 for k (${(k)SPACEZSH_ALIAS_MAPPINGS}); do
-    if [[ "$k" =~ '^[a-zA-Z0-9/]' ]]; then
+    if [[ "$k" =~ '^[a-zA-Z0-9/+]' ]]; then
         bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
     elif [[ "$k" = $'\x7f' ]]; then
           bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
