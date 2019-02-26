@@ -247,7 +247,7 @@ spacezsh.fzf.widget.fzf-file-widget-wrapper() {
 }
 zle     -N   spacezsh.fzf.widget.fzf-file-widget-wrapper
 
-bindkey -M SPACEZSH_KEYMAP "zg" spacezsh.fzf.widget.git-checkout
+bindkey -M SPACEZSH_KEYMAP "gc" spacezsh.fzf.widget.git-checkout
 bindkey -M SPACEZSH_KEYMAP "zC" spacezsh.fzf.widget.select-dir-no-recursive
 bindkey -M SPACEZSH_KEYMAP "zT" spacezsh.fzf.widget.no-recursive
 bindkey -M SPACEZSH_KEYMAP "zd" spacezsh.fzf.widget.cd
