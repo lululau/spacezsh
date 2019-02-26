@@ -150,6 +150,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'tl' 'tmux list-sessions\n'
 
     $'\x7f' 'echo saas\n'
+
+    '?' 'spacezsh-help\n'
 )
 
 SPACEZSH_ALIAS_MAPPINGS[es]="emacs --daemon$([ $(uname) = Darwin ] && echo '=term')\\n"
@@ -186,7 +188,7 @@ function spacezsh.alias.widget() {
 zle -N spacezsh.alias.widget
 
 for k (${(k)SPACEZSH_ALIAS_MAPPINGS}); do
-    if [[ "$k" =~ '^[a-zA-Z0-9/+]' ]]; then
+    if [[ "$k" =~ '^[a-zA-Z0-9/+?]' ]]; then
         bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
     elif [[ "$k" = $'\x7f' ]]; then
           bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
