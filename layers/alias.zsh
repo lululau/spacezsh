@@ -53,6 +53,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'r3' 'rvm use 2.3\n'
     'r4' 'rvm use 2.4\n'
     'r5' 'rvm use 2.5\n'
+    'r6' 'rvm use 2.6\n'
     'rs' 'rvm use system\n'
     'rd' 'rvm use default\n'
     'ru' 'rvm get master\n'
@@ -72,6 +73,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'msr' 'mvn spring-boot:run\n'
     'msj' 'mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentpath:/usr/local/jrebel/lib/libjrebel64.dylib"\n'
     'mr' 'mvn dependency:resolve\n'
+    'mt' 'mvn dependency:tree | less\n'
     'mi' 'mvn install\n'
     'mx' 'mvn exec:java -Dexec.mainClass= '
 
@@ -91,7 +93,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'sr' "$([ $(uname) = Linux ] && echo 'sudo systemctl restart ' || echo 'brew services restart ')"
     'pi' 'ping '
     'ps' 'ps -ef | ag '
-    'rc' 'rsync -az --progress --delete _@_ '
+    'rc' 'rsync -az --progress _@_ '
+    'rC' 'rsync -az --progress --delete _@_ '
     'ns' 'nslookup '
     'tr' 'traceroute '
     'su' 'sudo _@_'
@@ -99,11 +102,17 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'ow' "chown -R $USER.$(groups|cut -d' ' -f1) _@_ "
     'oW' 'chown -R root.root _@_ '
     '+x' 'chmod +x _@_ '
-    'te' 'tree -N\n'
+    'te' 'tree -NC\n'
+    'mm' 'sudo PAGER=mitmproxy-viewer mitmproxy -m transparent --showhost\n'
+    'mM' 'PAGER=mitmproxy-viewer mitmproxy --showhost\n'
+    'tp' 'sudo toggle-pf all\n'
+    'tP' 'sudo toggle-pf\n'
+    'of' 'lsof -np _@_'
+    'vi' 'vim _@_\n'
 
     # Trash
-    'Tl' 'mm -l\n'
-    'Te' 'mm -e\n'
+    'Tl' 'trash -l\n'
+    'Te' 'trash -e\n'
 
     # Perl
     'sm' "_@_ | perl -lne '\$s+=\$_;END{print "\$s"}' "
@@ -112,12 +121,20 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'pn' '_@_ | perl -ne '
     'pa' '_@_ | perl -F"" -alne '
 
+    # Ruby
+    're' '_@_ | ruby -e '
+    'rp' '_@_ | ruby -pe '
+    'rn' '_@_ | ruby -ne '
+    'ra' '_@_ | ruby -F"" -alne '
+
     # Files
     'ff' 'find . -name '
     'fF' 'mfd -o . '
     'f/' '_@_ | ag '
+    'ag' '_@_ | ag '
     'fe' 'ee _@_\n'
     'fE' 'see _@_\n'
+    'fx' 'x _@_\n'
     'fb' 'bat _@_\n'
     'fc' 'cat _@_'
     'fh' '_@_ | head '
@@ -126,18 +143,24 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'wl' '_@_ | wc -l '
     'wc' '_@_ | wc -c '
     'fo' 'open _@_\n'
+    'f.' 'open .\n'
     'fp' 'preview _@_\n'
     'fD' 'rm -r _@_ '
-    'fT' 'mm _@_\n'
+    'fd' 'mm _@_\n'
     'fR' 'mv _@_ '
     'fC' 'cp -a _@_ '
     'od' '_@_ | od -Ad -tc '
+    'oD' '_@_ | od -Ad -tx1 '
     'fl' 'l -d _@_\n'
     'lv' 'lnav _@_ '
 
     # Aliases in other layers
     'tk' 'tmux kill-server\n'
     'tl' 'tmux list-sessions\n'
+
+    $'\x7f' 'echo saas\n'
+
+    '?' 'spacezsh-help\n'
 )
 
 SPACEZSH_ALIAS_MAPPINGS[es]="emacs --daemon$([ $(uname) = Darwin ] && echo '=term')\\n"
@@ -147,6 +170,8 @@ function spacezsh.alias.widget() {
     local value=$SPACEZSH_ALIAS_MAPPINGS[$KEYS]
     if [[ "$value" =~ _@_ ]]; then
       value=${value//_@_/$BUFFER}
+    elif [[ "$KEYS" = $'\x7f' ]]; then
+      value=${BUFFER%|*}
     else
         for i ({1..10}); do
             if [[ "$value" =~ _$i_ ]]; then
@@ -172,8 +197,10 @@ function spacezsh.alias.widget() {
 zle -N spacezsh.alias.widget
 
 for k (${(k)SPACEZSH_ALIAS_MAPPINGS}); do
-    if [[ "$k" =~ '^[a-zA-Z0-9/]' ]]; then
+    if [[ "$k" =~ '^[a-zA-Z0-9/+?]' ]]; then
         bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
+    elif [[ "$k" = $'\x7f' ]]; then
+          bindkey -M SPACEZSH_KEYMAP "$k" spacezsh.alias.widget
     else
         bindkey "$k" spacezsh.alias.widget
     fi

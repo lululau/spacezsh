@@ -2,7 +2,8 @@
 
 SPACEZSH_HOME=$(cd $(dirname "$0"); pwd)
 
-SPACEZSH_LEADER=$'\eq'
+# SPACEZSH_LEADER=$'\eq'
+SPACEZSH_LEADER='^X@s,'
 
 SPACEZSH_KEYTIMEOUT=${SPACEZSH_KEYTIMEOUT:-500}
 KEYTIMEOUT=$SPACEZSH_KEYTIMEOUT
@@ -44,3 +45,5 @@ fi
 for layer in "$SPACEZSH_LAYERS[@]"; do
     source "$SPACEZSH_HOME/layers/$layer.zsh"
 done
+
+source "$SPACEZSH_HOME/help.zsh"

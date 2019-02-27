@@ -27,7 +27,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     's' ~/Documents/scratches
     'S' ~/snips
     't' ~/tmp
-    'T' ~/.tmux
+    'T' ~/.Trash
     'v' /Volumes
     'z' ~/.spacezsh
     'Z' ~/.oh-my-zsh
@@ -47,7 +47,7 @@ typeset -A SPACEZSH_EMACS_EXT_MAPPINGS=(
 )
 
 typeset -A SPACEZSH_FZF_EXT_MAPPINGS=(
-    $'\egc' spacezsh.fzf.widget.git-checkout
+    $'\eg\ec' spacezsh.fzf.widget.git-checkout
     $'\eC' spacezsh.fzf.widget.select-dir-no-recursive
     $'\et' spacezsh.fzf.widget.no-recursive
     $'\eX' spacezsh.fzf.widget.cd
