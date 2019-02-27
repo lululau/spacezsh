@@ -4,7 +4,7 @@ SPACEZSH_LAYERS=(alias alfred dir emacs enhanced-vi fzf kill tmux)
 
 typeset -A SPACEZSH_DIR_MAPPINGS=(
     'a' ..
-    'A' /Applications
+    'A' /server/app/
     'b' ~/bin
     'c' ~/.config
     'C' ~/cascode
@@ -18,9 +18,9 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'i' ~/Library/Mobile\ Documents/com~apple~CloudDocs
     'j' ~/cascode/spring/demo
     'k' ~/kt
-    'l' ~/Library/Application\ Support
+    'l' /server/app/logs
     'L' ~/Library/Preferences
-    'm' ~/Movies
+    'n' /etc/nginx/conf.d
     'p' '=> popd -q'
     'P' '=> project_root_widget'
     'r' ~/.tmux-resurrect

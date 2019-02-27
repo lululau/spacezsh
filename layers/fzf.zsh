@@ -167,7 +167,7 @@ spacezsh.fzf.widget.auotjump() {
     if [ $(uname) = Darwin ]; then
       tac_cmd=gtac
     fi
-    local dir=$({ dirs -pl; autojump -s | sed -n '/^_______/!p; /^_______/q'  | $tac_cmd | cut -d$'\t' -f2; } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" $(__fzfcmd) +m)
+    local dir=$({ dirs -pl; jumpstat | sed -n '/^_______/!p; /^_______/q'  | $tac_cmd | cut -d$'\t' -f2; } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" $(__fzfcmd) +m)
     if [[ -z "$dir" || ! -e "$dir" ]]; then
         zle redisplay
         return 0
@@ -189,7 +189,7 @@ spacezsh.fzf.widget.select-dir-autojump() {
     if [ $(uname) = Darwin ]; then
       tac_cmd=gtac
     fi
-    LBUFFER="${LBUFFER}$({dirs -pl; autojump -s | sed -n '/^_______/!p; /^_______/q' | $tac_cmd  | cut -d$'\t' -f2; } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" $(__fzfcmd) +m | sed "s#^#'#;s#\$#'#") "
+    LBUFFER="${LBUFFER}$({dirs -pl; jumpstat | sed -n '/^_______/!p; /^_______/q' | $tac_cmd  | cut -d$'\t' -f2; } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_J_OPTS" $(__fzfcmd) +m | sed "s#^#'#;s#\$#'#") "
     zle redisplay
 }
 zle     -N   spacezsh.fzf.widget.select-dir-autojump
