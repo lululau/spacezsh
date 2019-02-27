@@ -108,6 +108,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'tp' 'sudo toggle-pf all\n'
     'tP' 'sudo toggle-pf\n'
     'of' 'lsof -np _@_'
+    'vi' 'vim _@_\n'
 
     # Trash
     'Tl' 'trash -l\n'
@@ -119,6 +120,12 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'pp' '_@_ | perl -pe '
     'pn' '_@_ | perl -ne '
     'pa' '_@_ | perl -F"" -alne '
+
+    # Ruby
+    're' '_@_ | ruby -e '
+    'rp' '_@_ | ruby -pe '
+    'rn' '_@_ | ruby -ne '
+    'ra' '_@_ | ruby -F"" -alne '
 
     # Files
     'ff' 'find . -name '
@@ -139,10 +146,11 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'f.' 'open .\n'
     'fp' 'preview _@_\n'
     'fD' 'rm -r _@_ '
-    'fT' 'mm _@_\n'
+    'fd' 'mm _@_\n'
     'fR' 'mv _@_ '
     'fC' 'cp -a _@_ '
     'od' '_@_ | od -Ad -tc '
+    'oD' '_@_ | od -Ad -tx1 '
     'fl' 'l -d _@_\n'
     'lv' 'lnav _@_ '
 
