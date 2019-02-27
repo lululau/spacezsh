@@ -10,7 +10,7 @@ function spacezsh-alias-help() {
       if [[ "${k[1]}" == $'\e' ]] {
         key=${k//$'\e'/Alt-}
       } else {
-        [[ "$k" =~ '(.)(.?)$' ]] && key="SPC ${match[1]/$'\x7f'/BS} $match[2]"
+        [[ "$k" =~ '(.)(.?)(.?)$' ]] && key="SPC ${match[1]/$'\x7f'/BS} $match[2] $match[3]"
       }
       echo -E "    $key  ==>  ${SPACEZSH_ALIAS_MAPPINGS[$k]}"
   }
