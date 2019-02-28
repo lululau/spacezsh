@@ -169,7 +169,7 @@ function spacezsh.alias.widget() {
     local args=(${(z)BUFFER})
     local value=$SPACEZSH_ALIAS_MAPPINGS[$KEYS]
     if [[ "$value" =~ _@_ ]]; then
-      value=${value//_@_/$BUFFER}
+      value=${value//_@_/${${BUFFER% }# }}
     elif [[ "$KEYS" = $'\x7f' ]]; then
       value=${BUFFER%|*}
     else
