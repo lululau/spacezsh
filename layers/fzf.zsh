@@ -247,6 +247,37 @@ spacezsh.fzf.widget.fzf-file-widget-wrapper() {
 }
 zle     -N   spacezsh.fzf.widget.fzf-file-widget-wrapper
 
+get-java-class-name() {
+    while { read line; } {
+            local name=${line:a}
+            name=${name#*/src/}
+            name=${name#*main/java/}
+            name=${name#*main/resources/}
+            name=${name#*test/java/}
+            name=${name#*test/resources/}
+            name=${name#*/target/}
+            name=${name#*classes/}
+            name=${name%.java}
+            name=${name%.class}
+            name=${name//\//.}
+            echo $name
+    }
+}
+
+spacezsh.fzf.widget.java-class-names() {
+  local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
+  local cmd="command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+        -o -type d -o \( -name '*.java' -o -name '*.class' \) -print 2> /dev/null | cut -b3- | get-java-class-name"
+  setopt localoptions pipefail 2> /dev/null
+  local class="$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) +m)"
+  LBUFFER="${BUFFER% } $class"
+  zle -K main
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+}
+
+zle     -N    spacezsh.fzf.widget.java-class-names
+
 bindkey -M SPACEZSH_KEYMAP "gc" spacezsh.fzf.widget.git-checkout
 bindkey -M SPACEZSH_KEYMAP "zC" spacezsh.fzf.widget.select-dir-no-recursive
 bindkey -M SPACEZSH_KEYMAP "zT" spacezsh.fzf.widget.no-recursive
@@ -261,6 +292,7 @@ bindkey -M SPACEZSH_KEYMAP "zo" spacezsh.fzf.widget.capture
 bindkey -M SPACEZSH_KEYMAP "ta" spacezsh.fzf.widget.tmux_attach_session
 bindkey -M SPACEZSH_KEYMAP "zf" spacezsh.fzf.widget.fzf-file-widget-wrapper
 bindkey -M SPACEZSH_KEYMAP "zt" spacezsh.fzf.widget.fzf-file-widget-wrapper
+bindkey -M SPACEZSH_KEYMAP "zJ" spacezsh.fzf.widget.java-class-names
 
 if [[ -z "$SPACEZSH_FZF_EXT_MAPPINGS" ]]; then
   typeset -A SPACEZSH_FZF_EXT_MAPPINGS=()
