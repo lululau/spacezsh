@@ -111,6 +111,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'tP' 'sudo toggle-pf\n'
     'of' 'lsof -np _@_'
     'vi' 'vim _@_\n'
+    'pc' '_@_ | pc\n'
 
     # Trash
     'Tl' 'trash -l\n'
@@ -138,7 +139,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'fE' 'see _@_\n'
     'fx' 'x _@_\n'
     'fb' 'bat _@_\n'
-    'fc' 'cat _@_'
+    'fc' 'cat _@_ '
     'fh' '_@_ | head '
     'fi' '_@_ | iconv -f GBK '
     'ft' 'tail -f _@_\n'
@@ -197,6 +198,29 @@ function spacezsh.alias.widget() {
 }
 
 zle -N spacezsh.alias.widget
+
+function spacezsh.alias.last_command.widget() {
+  LBUFFER="$(history | tail -1 | perl -pe 's/^\s*\d*\s*//;s/\S+\s*$//')"
+  zle -K main
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+}
+
+zle -N spacezsh.alias.last_command.widget
+
+
+function spacezsh.alias.last_command_name.widget() {
+  LBUFFER="$(history | tail -1 | perl -pe 's/^\s*\d*\s*(\S+).*/$1 /')"
+  zle -K main
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+}
+
+zle -N spacezsh.alias.last_command_name.widget
+
+bindkey "^x^p" spacezsh.alias.last_command.widget
+
+bindkey "^xp" spacezsh.alias.last_command_name.widget
 
 for k (${(k)SPACEZSH_ALIAS_MAPPINGS}); do
     if [[ "$k" =~ '^[a-zA-Z0-9/+?]' ]]; then
