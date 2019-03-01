@@ -29,6 +29,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'gb' 'git branch -vvv\n'
     'gL' 'git pull\n'
     'gP' 'git push\n'
+    'gf' 'git fire\n'
     $'\egs' 'git status\n'
     $'\egd' 'git diff\n'
     $'\egl' 'git log\n'
