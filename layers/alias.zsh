@@ -112,6 +112,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'of' 'lsof -np _@_'
     'vi' 'vim _@_\n'
     'pc' '_@_ | pc\n'
+    'du' 'du -sh\n'
+    'df' 'df -h\n'
 
     # Trash
     'Tl' 'trash -l\n'
