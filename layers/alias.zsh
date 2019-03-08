@@ -25,6 +25,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'gp' 'git log -p\n'
     'g-' 'git checkout -\n'
     'gg' 'magit\n'
+    $'\x18@sg' 'magit\n'
     'gr' 'git remote -vvv\n'
     'gb' 'git branch -vvv\n'
     'gL' 'git pull\n'
