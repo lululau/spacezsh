@@ -36,8 +36,12 @@ spacezsh.fzf.widget.cd() {
   fi
   if [[ -d "$dir" ]]; then
     cd "$dir"
+    spacezsh_fzf_widget_selected_file_base_name=''
   else
     cd "$dir:h"
+    if [[ "$1" == false ]]; then
+      spacezsh_fzf_widget_selected_file_base_name=/$dir:t
+    fi
   fi
   zle -K main
   local ret=$?
@@ -70,7 +74,7 @@ spacezsh.fzf.widget.cd-norecursive() {
     zle -K main
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'enter:execute(echo)+accept,alt-enter:accept,alt-a:execute(echo cd ..)+accept,alt-p:execute(echo popd -q)+accept,alt-h:execute(echo cd __HOME_IN_FZF__)+accept,alt-/:execute(echo cd __ROOT_IN_FZF__)+accept,alt-o:execute(echo cd -)+accept,space:execute(echo exit)+accept,alt-x:execute(echo cd-widget)+accept')"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'enter:execute(echo)+accept,alt-enter:accept,alt-a:execute(echo cd ..)+accept,alt-p:execute(echo popd -q)+accept,alt-h:execute(echo cd __HOME_IN_FZF__)+accept,alt-/:execute(echo cd __ROOT_IN_FZF__)+accept,alt-o:execute(echo cd -)+accept,space:execute(echo exit)+accept,alt-x:execute(echo cd-widget)+accept,ctrl-t:execute(echo fzf-file)+accept')"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
@@ -94,6 +98,8 @@ spacezsh.fzf.widget.cd-norecursive() {
       cd "${res#$'exit\n'}"
     elif [[ "$res" = $'cd-widget'* ]]; then
       zle spacezsh.fzf.widget.cd
+    elif [[ "$res" = $'fzf-file'* ]]; then
+      zle spacezsh.fzf.widget.fzf-file-widget-wrapper
     else
       LBUFFER="${LBUFFER}${(q)file} "
       omz_termsupport_precmd
@@ -120,7 +126,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
     local old_lbuffer=$LBUFFER
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'enter:execute(echo)+accept,alt-enter:accept,alt-a:execute(echo cd ..)+accept,alt-p:execute(echo popd -q)+accept,alt-h:execute(echo cd __HOME_IN_FZF__)+accept,alt-/:execute(echo cd __ROOT_IN_FZF__)+accept,alt-o:execute(echo cd -)+accept')"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'enter:execute(echo)+accept,alt-enter:accept,alt-a:execute(echo cd ..)+accept,alt-p:execute(echo popd -q)+accept,alt-h:execute(echo cd __HOME_IN_FZF__)+accept,alt-/:execute(echo cd __ROOT_IN_FZF__)+accept,alt-o:execute(echo cd -)+accept,alt-x:execute(echo cd-widget)+accept,ctrl-t:execute(echo cd-widget)+accept')"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
@@ -140,6 +146,8 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
       popd -q
     elif [[ "$res" = $'cd -'* ]]; then
       cd -
+    elif [[ "$res" = $'cd-widget'* ]]; then
+      zle spacezsh.fzf.widget.cd false
     else
       LBUFFER="${LBUFFER}$(echo ${file:a} | sed 's/^/'\''/;s/$/'\''/') "
       zle reset-prompt
@@ -151,7 +159,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
         spacezsh.fzf.widget.select-dir-no-recursive false
     fi
     if [[ "$1" != false ]]; then
-      quit_pwd=$PWD
+      quit_pwd=$PWD${spacezsh_fzf_widget_selected_file_base_name}
       cd "$old_pwd"
       if [ "$LBUFFER" = "$old_lbuffer" ]; then
         LBUFFER="${LBUFFER}$(echo ${quit_pwd:a} | sed 's/^/'\''/;s/$/'\''/') "
