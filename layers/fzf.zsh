@@ -27,14 +27,18 @@ zle     -N   spacezsh.fzf.widget.no-recursive
 spacezsh.fzf.widget.cd() {
   local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
   local cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type d -print 2> /dev/null | cut -b3-"}"
+    -o -print 2> /dev/null | cut -b3-"}"
   setopt localoptions pipefail 2> /dev/null
   local dir="$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) +m)"
   if [[ -z "$dir" ]]; then
     zle redisplay
     return 0
   fi
-  cd "$dir"
+  if [[ -d "$dir" ]]; then
+    cd "$dir"
+  else
+    cd "$dir:h"
+  fi
   zle -K main
   local ret=$?
   zle reset-prompt
