@@ -96,15 +96,15 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'pi' 'ping '
     'if' 'ifconfig '
     'ps' 'ps -ef | ag '
-    'rc' 'rsync -az --progress _@_ '
-    'rC' 'rsync -az --progress --delete _@_ '
+    'rc' 'rsync -az --progress _@_'
+    'rC' 'rsync -az --progress --delete _@_'
     'ns' 'nslookup '
     'tr' 'traceroute '
     'su' 'sudo _@_'
     'le' '_@_ | less '
-    'ow' "chown -R $USER.$(groups|cut -d' ' -f1) _@_ "
-    'oW' 'chown -R root.root _@_ '
-    '+x' 'chmod +x _@_ '
+    'ow' "chown -R $USER.$(groups|cut -d' ' -f1) _@_"
+    'oW' 'chown -R root.root _@_'
+    '+x' 'chmod +x _@_'
     'te' 'tree -NC\n'
     'mm' 'sudo PAGER=mitmproxy-viewer mitmproxy -m transparent --showhost\n'
     'mM' 'PAGER=mitmproxy-viewer mitmproxy --showhost\n'
@@ -158,7 +158,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'od' '_@_ | od -Ad -tc '
     'oD' '_@_ | od -Ad -tx1 '
     'fl' 'l -d _@_\n'
-    'lv' 'lnav _@_ '
+    'lv' 'lnav _@_'
 
     # Aliases in other layers
     'tk' 'tmux kill-server\n'
