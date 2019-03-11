@@ -110,7 +110,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'mM' 'PAGER=mitmproxy-viewer mitmproxy --showhost\n'
     'tp' 'sudo toggle-pf all\n'
     'tP' 'sudo toggle-pf\n'
-    'of' 'lsof -np _@_'
+    'of' 'lsof -Pnp _@_'
     'vi' 'vim _@_\n'
     'pc' '_@_ | pc\n'
     'du' 'du -sh\n'
