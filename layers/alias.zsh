@@ -9,6 +9,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'lr' 'l -tr\n'
     'lR' 'la -tr\n'
     'la' 'la\n'
+    'lA' 'lA\n'
     $'\eL' 'ls\n'
     $'\el\el' 'l\n'
     $'\elr' 'l -tr\n'
