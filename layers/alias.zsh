@@ -76,7 +76,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'msr' 'mvn spring-boot:run\n'
     'msj' 'mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentpath:/usr/local/jrebel/lib/libjrebel64.dylib"\n'
     'mr' 'mvn dependency:resolve\n'
-    'mt' 'mvn dependency:tree | less\n'
+    'mt' 'maven-deps-tree-to-org\n'
     'mi' 'mvn install\n'
     'mx' 'mvn exec:java -Dexec.mainClass= '
 
