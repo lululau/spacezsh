@@ -116,6 +116,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'pc' '_@_ | pc\n'
     'du' 'du -sh\n'
     'df' 'df -h\n'
+    'rh' 'rehash\n'
 
     # Trash
     'Tl' 'trash -l\n'
