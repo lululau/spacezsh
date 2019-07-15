@@ -118,6 +118,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'du' 'du -sh\n'
     'df' 'df -h\n'
     'rh' 'rehash\n'
+    'tc' 'tar -zcf _@_.tgz _@_'
+    'tx' 'tar -zxf _@_'
 
     # Trash
     'Tl' 'trash -l\n'
