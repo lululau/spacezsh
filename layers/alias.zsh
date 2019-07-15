@@ -21,6 +21,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
 
     # git
     'gs' 'git status\n'
+    'gS' './gstatus\n'
     'gd' 'git diff\n'
     'gl' 'git log\n'
     'gp' 'git log -p\n'
@@ -29,10 +30,12 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     $'\x18@sg' 'magit\n'
     'gr' 'git remote -vvv\n'
     'gb' 'git branch -vvv\n'
-    'gL' 'git pull\n'
+    'gLl' 'git pull\n'
+    'gLL' './gpull\n'
     'gP' 'git push\n'
     'gf' 'git fire\n'
     $'\egs' 'git status\n'
+    $'\egS' './gstatus\n'
     $'\egd' 'git diff\n'
     $'\egl' 'git log\n'
     $'\egp' 'git log -p\n'
