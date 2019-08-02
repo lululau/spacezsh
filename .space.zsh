@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-SPACEZSH_LAYERS=(alias alfred dir emacs enhanced-vi fzf kill tmux)
+SPACEZSH_LAYERS=(alias alfred dir emacs enhanced-vi fzf kill tmux issh)
 
 typeset -A SPACEZSH_DIR_MAPPINGS=(
     'a' ..

@@ -17,7 +17,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     $'\ela' 'la\n'
 
     # ssh-dialog
-    $'\es' 'ss\n'
+    $'\eS' 'ss\n'
 
     # git
     'gs' 'git status\n'
