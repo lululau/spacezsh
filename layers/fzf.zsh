@@ -45,7 +45,7 @@ spacezsh.fzf.widget.cd() {
   fi
   zle -K main
   local ret=$?
-  zle reset-prompt
+  reset-prompt
   typeset -f zle-line-init >/dev/null && zle zle-line-init
   omz_termsupport_precmd
   return $ret
@@ -64,7 +64,7 @@ zle     -N    spacezsh.fzf.widget.cd
 #     zle -K main
 #     cd "$dir"
 #     local ret=$?
-#     zle reset-prompt
+#     reset-prompt
 #     typeset -f zle-line-init >/dev/null && zle zle-line-init
 #     omz_termsupport_precmd
 #     return $ret
@@ -103,7 +103,7 @@ spacezsh.fzf.widget.cd-norecursive() {
     else
       LBUFFER="${LBUFFER}${(q)file} "
       omz_termsupport_precmd
-      zle reset-prompt
+      reset-prompt
       return 0
     fi
 
@@ -112,7 +112,7 @@ spacezsh.fzf.widget.cd-norecursive() {
         spacezsh.fzf.widget.cd-norecursive false
     fi
     if [[ "$1" != false ]]; then
-      zle reset-prompt
+      reset-prompt
       typeset -f zle-line-init >/dev/null && zle zle-line-init
     fi
     omz_termsupport_precmd
@@ -150,7 +150,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
       zle spacezsh.fzf.widget.cd false
     else
       LBUFFER="${LBUFFER}$(echo ${file:a} | sed 's/^/'\''/;s/$/'\''/') "
-      zle reset-prompt
+      reset-prompt
       return 0
     fi
 
@@ -164,7 +164,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
       if [ "$LBUFFER" = "$old_lbuffer" ]; then
         LBUFFER="${LBUFFER}$(echo ${quit_pwd:a} | sed 's/^/'\''/;s/$/'\''/') "
       fi
-      zle reset-prompt
+      reset-prompt
       typeset -f zle-line-init >/dev/null && zle zle-line-init
     fi
     return $ret
@@ -186,7 +186,8 @@ spacezsh.fzf.widget.auotjump() {
     fi
     cd "$dir"
     local ret=$?
-    zle reset-prompt
+    starship_precmd
+    reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     omz_termsupport_precmd
     return $ret
@@ -233,7 +234,7 @@ spacezsh.fzf.widget.git-checkout() {
     fi
     git checkout "$branch"
     local ret=$?
-    zle reset-prompt
+    reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     return $ret
 }

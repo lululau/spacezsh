@@ -15,7 +15,7 @@ spacezsh.nnn.widget() {
     spacezsh.nnn.n <>/dev/tty
     zle redisplay
     local ret=$?
-    zle reset-prompt
+    reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     return $ret
 }

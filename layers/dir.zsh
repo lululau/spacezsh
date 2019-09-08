@@ -13,7 +13,7 @@ spacezsh.dir.widget() {
     fi
     zle -K main
     local ret=$?
-    zle reset-prompt
+    reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     omz_termsupport_precmd
     return $ret

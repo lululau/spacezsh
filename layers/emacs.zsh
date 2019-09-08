@@ -21,7 +21,7 @@ spacezsh.emacs.widget.dired() {
     zle -K main
     zle redisplay
     local ret=$?
-    zle reset-prompt
+    reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     omz_termsupport_precmd
     return $ret
@@ -55,7 +55,7 @@ spacezsh.emacs.widget.capture() {
     zle -K main
     zle redisplay
     local ret=$?
-    zle reset-prompt
+    reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     return $ret
 }
@@ -72,7 +72,7 @@ spacezsh.emacs.widget.search() {
     zle -K main
     zle redisplay
     local ret=$?
-    zle reset-prompt
+    reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     return $ret
 }

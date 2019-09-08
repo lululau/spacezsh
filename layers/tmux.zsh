@@ -15,7 +15,7 @@ spacezsh.tmux.widget.selectl() {
     local value=$SPACEZSH_TMUX_LAYOUT_MAPPINGS[$key]
     tmux selectl $value
     local ret=$?
-    zle reset-prompt
+    reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     omz_termsupport_precmd
     return $ret

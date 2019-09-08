@@ -8,6 +8,13 @@ SPACEZSH_LEADER=$'\eq'
 SPACEZSH_KEYTIMEOUT=${SPACEZSH_KEYTIMEOUT:-500}
 KEYTIMEOUT=$SPACEZSH_KEYTIMEOUT
 
+function reset-prompt() {
+  if [ -n "$STARSHIP_SHELL" ]; then
+    starship_precmd
+  fi
+  zle reset-prompt
+}
+
 function SPACEZSH_WIDGET_FALLBACK() {
     if [ "$KEYS" = ' ' ]; then
         zle self-insert
