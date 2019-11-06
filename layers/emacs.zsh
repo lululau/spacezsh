@@ -31,7 +31,7 @@ zle     -N    spacezsh.emacs.widget.dired
 spacezsh.emacs.widget.capture() {
     setopt localoptions pipefail 2> /dev/null
     if [ -n "$TMUX" ]; then
-      local capture_cmd='tmux capture-pane -pS -'
+      local capture_cmd='tmux capture-pane -pJS -'
     elif [ $(uname) = Darwin ]; then
       local contents=$(osascript -e "tell app \"iTerm\" to get contents of current session of current tab of current window")
       local capture_cmd='echo "$contents"'
