@@ -168,6 +168,9 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'fl' 'l -d _@_\n'
     'lv' 'lnav _@_'
 
+    # Others
+    'ty' 'type -a _@_ '
+
     # Aliases in other layers
     'tk' 'tmux kill-server\n'
     'tl' 'tmux list-sessions\n'
