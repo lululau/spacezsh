@@ -129,13 +129,13 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
 
     # Perl
     'sm' "_@_ | perl -lne '\$s+=\$_;END{print "\$s"}' "
-    'pe' '_@_ | perl -e '
+    'pe' '_@_ || perl -e '
     'pp' '_@_ | perl -pe '
     'pn' '_@_ | perl -ne '
     'pa' '_@_ | perl -F"" -alne '
 
     # Ruby
-    're' '_@_ | ruby -e '
+    're' '_@_ || ruby -e '
     'rp' '_@_ | ruby -pe '
     'rn' '_@_ | ruby -ne '
     'ra' '_@_ | ruby -F"" -alne '
@@ -143,19 +143,19 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     # Files
     'ff' 'find . -name '
     'fF' 'mfd -o . '
-    'f/' '_@_ | ag '
-    'ag' '_@_ | ag '
+    'f/' '_@_ || ag '
+    'ag' '_@_ || ag '
     'fe' 'ee _@_\n'
     'fE' 'see _@_\n'
     'fx' 'x _@_\n'
     'fb' 'bat _@_\n'
     'fc' 'cat _@_ '
-    'fh' '_@_ | head '
-    'ic' '_@_ | iconv -f GBK '
+    'fh' '_@_ || head '
+    'ic' '_@_ || iconv -f GBK '
     'fi' 'file _@_\n'
     'ft' 'tail -f _@_\n'
-    'wl' '_@_ | wc -l '
-    'wc' '_@_ | wc -c '
+    'wl' '_@_ || wc -l '
+    'wc' '_@_ || wc -c '
     'fo' 'open _@_\n'
     'f.' 'open .\n'
     'fp' 'preview _@_\n'
@@ -163,8 +163,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'fd' 'trash _@_\n'
     'fR' 'mv _@_ '
     'fC' 'cp -a _@_ '
-    'od' '_@_ | od -Ad -tc '
-    'oD' '_@_ | od -Ad -tx1 '
+    'od' '_@_ || od -Ad -tc '
+    'oD' '_@_ || od -Ad -tx1 '
     'fl' 'l -d _@_\n'
     'lv' 'lnav _@_'
 
@@ -185,7 +185,15 @@ SPACEZSH_ALIAS_MAPPINGS[es]="emacs --daemon$([ $(uname) = Darwin ] && echo '=ter
 function spacezsh.alias.widget() {
     local args=(${(z)BUFFER})
     local value=$SPACEZSH_ALIAS_MAPPINGS[$KEYS]
-    if [[ "$value" =~ _@_ ]]; then
+    if [[ "$value" =~ '_@_ *\|\|' ]]; then
+      if [ -n "${BUFFER// /}" ]; then
+        value=${value//||/|}
+        value=${value//_@_/${${BUFFER% }# }}
+      else
+        value=${value#*||}
+        value=${value#* }
+      fi
+    elif [[ "$value" =~ _@_ ]]; then
       value=${value//_@_/${${BUFFER% }# }}
     elif [[ "$KEYS" = $'\x7f' ]]; then
       value=${BUFFER%|*}
