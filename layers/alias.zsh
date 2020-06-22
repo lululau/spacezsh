@@ -11,10 +11,6 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'la' 'la\n'
     'lA' 'lA\n'
     $'\eL' 'ls\n'
-    $'\el\el' 'l\n'
-    $'\elr' 'l -tr\n'
-    $'\el\er' 'la -tr\n'
-    $'\ela' 'la\n'
 
     # ssh-dialog
     $'\eS' 'ss\n'
@@ -171,6 +167,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
 
     # Others
     'ty' 'type -a _@_ '
+    $'\el' 'vrl\n'
 
     # Aliases in other layers
     'tk' 'tmux kill-server\n'
