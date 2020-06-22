@@ -22,6 +22,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     # git
     'gs' 'git status\n'
     'gS' 'git multi-status\n'
+    'gB' 'git multi-branch\n'
     'gd' 'git diff\n'
     'gl' 'git log\n'
     'gp' 'git log -p\n'
