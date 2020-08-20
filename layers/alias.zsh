@@ -99,7 +99,6 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'ps' 'ps -ef | ag '
     'rc' 'rsync -az --progress _@_'
     'rC' 'rsync -az --progress --delete _@_'
-    'ns' 'nslookup '
     'tr' 'traceroute '
     'su' 'sudo _@_'
     'le' '_@_ | less '
