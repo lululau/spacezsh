@@ -58,14 +58,5 @@ typeset -A SPACEZSH_FZF_EXT_MAPPINGS=(
     $'\eo' spacezsh.fzf.widget.capture
 )
 
-export NNN_TMPFILE="/tmp/nnn"
-export NNN_USE_EDITOR=1
-export NNN_COPIER=$HOME/bin/copier_for_nnn.sh
-# export NNN_DE_FILE_MANAGER=open
-# export NNN_NOWAIT=1
-typeset -A SPACEZSH_NNN_EXT_MAPPINGS=(
-    $'\en' spacezsh.nnn.widget
-)
-
 SPACEZSH_BARE_SPACE_ENABLED=true
 source $HOME/.spacezsh/init.zsh

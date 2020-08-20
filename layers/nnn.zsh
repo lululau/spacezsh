@@ -12,6 +12,11 @@ function spacezsh.nnn.n() {
     export NNN_FIFO='/tmp/nnn.fifo'
     export NNN_ARCHIVE="\\.(7z|bz2|gz|tar|tgz|zip)$"
     export NNN_PLUG='f:finder;z:fzcd;p:preview-tui'
+    export NNN_USE_EDITOR=1
+    export NNN_COPIER=$HOME/bin/copier_for_nnn.sh
+    # export NNN_DE_FILE_MANAGER=open
+    # export NNN_NOWAIT=1
+
     export NNN_ENV_DEFINED=1
   fi
 
@@ -26,8 +31,8 @@ function spacezsh.nnn.n() {
 spacezsh.nnn.widget() {
   zle -K main
   setopt localoptions pipefail 2> /dev/null
-  spacezsh.nnn.n <>/dev/tty
-  zle redisplay
+  BUFFER=spacezsh.nnn.n
+  zle accept-line
   local ret=$?
   reset-prompt
   typeset -f zle-line-init >/dev/null && zle zle-line-init
