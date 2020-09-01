@@ -155,7 +155,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'fo' 'open _@_\n'
     'f.' 'open .\n'
     'fp' 'preview _@_\n'
-    'fD' 'rm -r _@_ '
+    'fD' '=rm -rf _@_ '
     'fd' 'trash _@_\n'
     'fR' 'mv _@_ '
     'fC' 'cp -a _@_ '
