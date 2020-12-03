@@ -15,7 +15,7 @@ spacezsh.emacs.widget.dired() {
     dir=$(spacezsh.emacs.emacsclient-func -e '(when (bound-and-true-p last-dir-for-cli-dir-nav) (print last-dir-for-cli-dir-nav))')
     spacezsh.emacs.emacsclient-func -e '(when (bound-and-true-p last-dir-for-cli-dir-nav) (setq last-dir-for-cli-dir-nav nil))'
     dir=${(Q)dir}
-    if [ -e ${~dir} ]; then
+    if [ -e "${~dir}" ]; then
         cd ${~dir}
     fi
     zle -K main
