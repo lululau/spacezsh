@@ -43,9 +43,9 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'bU' 'brew upgrade && brew cleanup\n'
     'bi' 'brew info '
     'be' 'brew edit '
-    'bl' 'brew list\n'
+    'bl' 'brew list --formula\n'
     'bs' 'brew search '
-    'b/' 'brew list | ag '
+    'b/' 'brew list --formula | ag '
 
     # rvm
     'rl' 'rvm list\n'
