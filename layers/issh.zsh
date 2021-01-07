@@ -11,9 +11,9 @@ spacezsh.issh.fzfcmd_complete() {
 spacezsh.issh.widget() {
   local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
   fzf="$(spacezsh.issh.fzfcmd_complete)"
-  matches=$(awk '/^Host \w/{print $2}' ~/.ssh/config | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} --min-height 15 --reverse $FZF_DEFAULT_OPTS --preview 'echo {}' --preview-window down:3:wrap $FZF_COMPLETION_OPTS" $(__fzfcmd) +m)
+  matches=$(ruby -e 'h=nil;ARGF.readlines.each {|l| l.chomp!; if l=~/^Host\s+\w/; puts h unless h.nil?; h=l.gsub(/^Host\s+/, ""); end; if l=~/^\s+Host[Nn]ame\s+\S/; puts "%-32s [ #{l.gsub(/^\s+Host.ame\s+/,"")} ]" % h; h=nil; end;}' ~/.ssh/config | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} --min-height 15 --reverse $FZF_DEFAULT_OPTS --preview 'echo {}' --preview-window down:3:wrap $FZF_COMPLETION_OPTS" $(__fzfcmd) +m)
   if [ -n "$matches" ]; then
-    LBUFFER="SSH_INTERACTIVE=1 ssh $matches"
+    LBUFFER="SSH_INTERACTIVE=1 ssh ${matches%% *}"
   fi
   zle -K main
   zle accept-line
