@@ -114,7 +114,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'vi' 'vim _@_\n'
     'pc' '_@_ | pc\n'
     'du' 'du -sh\n'
-    'df' 'df -h\n'
+    'df' '[ -e /usr/local/bin/duf ] && /usr/local/bin/duf || df -h \n'
     'rh' 'rehash\n'
     'tc' 'tar -zcf _@_.tgz _@_'
     'tx' 'tar -zxf _@_'
