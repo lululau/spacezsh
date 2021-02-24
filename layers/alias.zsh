@@ -40,7 +40,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
 
     # Homebrew
     'bu' 'brew update && brew outdated\n'
-    'bU' 'brew upgrade && brew cleanup\n'
+    'bU' 'brew upgrade && brew post-update && brew cleanup\n'
     'bi' 'brew info '
     'be' 'brew edit '
     'bl' 'brew list --formula\n'
