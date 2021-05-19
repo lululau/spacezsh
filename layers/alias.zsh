@@ -30,6 +30,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'gL' 'gpull\n'
     'gP' 'git push\n'
     'gf' 'git fire\n'
+    'gu' 'gitui\n'
     $'\egs' 'git status\n'
     $'\egS' './gstatus\n'
     $'\egd' 'git diff\n'
