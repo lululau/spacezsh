@@ -19,7 +19,19 @@ spacezsh.dir.widget() {
     return $ret
 }
 
+spacezsh.dir.tmux-pane.widget() {
+  cd "$(tmux display-message -p "#{pane_current_path}")"
+  zle -K main
+  local ret=$?
+  reset-prompt
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  omz_termsupport_precmd
+  return $ret
+}
+
+
 zle     -N   spacezsh.dir.widget
+zle     -N   spacezsh.dir.tmux-pane.widget
 
 for k (${(k)SPACEZSH_DIR_MAPPINGS}); do
     if [[ "$k" =~ '^[a-zA-Z0-9/]+$' ]]; then
@@ -28,3 +40,5 @@ for k (${(k)SPACEZSH_DIR_MAPPINGS}); do
         bindkey "$k" spacezsh.dir.widget
     fi
 done
+
+bindkey $'\030@s\015' spacezsh.dir.tmux-pane.widget
