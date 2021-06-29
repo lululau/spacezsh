@@ -165,6 +165,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'oD' '_@_ || od -Ad -tx1 '
     'fl' 'l -d _@_\n'
     'lv' 'lnav _@_'
+    'vl' 'vrl\n'
 
     # Others
     'ty' 'type -a _@_ '
