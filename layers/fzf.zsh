@@ -186,7 +186,7 @@ spacezsh.fzf.widget.auotjump() {
     fi
     cd "$dir"
     local ret=$?
-    starship_precmd
+    prompt_starship_precmd
     reset-prompt
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     omz_termsupport_precmd

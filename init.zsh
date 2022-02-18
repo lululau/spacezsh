@@ -10,7 +10,7 @@ KEYTIMEOUT=$SPACEZSH_KEYTIMEOUT
 
 function reset-prompt() {
   if [ -n "$STARSHIP_SHELL" ]; then
-    starship_precmd
+    prompt_starship_precmd
   fi
   zle reset-prompt
 }
