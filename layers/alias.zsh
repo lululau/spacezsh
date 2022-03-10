@@ -148,6 +148,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'fE' 'see _@_\n'
     'fx' 'x _@_\n'
     'fb' 'bat _@_\n'
+    'fv' 'view _@_\n'
     'fc' 'cat _@_ '
     'fh' '_@_ || head '
     'ic' '_@_ || iconv -f GBK '
