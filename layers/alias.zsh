@@ -115,6 +115,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'of' 'lsof -Pnp _@_'
     'vi' 'vim _@_\n'
     'me' 'me _@_\n'
+    'dn' 'download _@_\n'
+    'up' 'upload\n'
     'pc' '_@_ | pc\n'
     'du' 'du -sh\n'
     'df' '[ -e /usr/local/bin/duf ] && /usr/local/bin/duf -hide-mp "*backup*" || df -h \n'
