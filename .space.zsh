@@ -11,7 +11,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'C' ~/cascode
     'd' ~/Downloads
     'D' ~/Documents
-    'e' ~/.emacs.d
+    'e' ~/.emacs.spacemacs.d
     'F' ~/Cafe
     'g' ~/cascode/github.com
     'h' ~
