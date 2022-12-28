@@ -92,6 +92,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     # Sys Admin
     'sL' "$([ $(uname) = Linux ] && echo 'sudo systemctl list-units | grep ' || echo 'brew services list\\n')"
     'sl' "$([ $(uname) = Linux ] && echo 'sudo systemctl status ' || echo 'brew services list | ag ')"
+    'si' "$([ $(uname) = Linux ] && echo 'sudo systemctl cat ' || echo 'brew services info --json ')"
     'ss' "$([ $(uname) = Linux ] && echo 'sudo systemctl start ' || echo 'brew services start ')"
     'se' "$([ $(uname) = Linux ] && echo 'sudo systemctl stop ' || echo 'brew services stop ')"
     'sr' "$([ $(uname) = Linux ] && echo 'sudo systemctl restart ' || echo 'brew services restart ')"
