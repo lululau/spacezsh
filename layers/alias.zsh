@@ -43,9 +43,10 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'bu' 'brew update && brew outdated\n'
     'bU' 'brew upgrade ; brew post-update ; brew cleanup ; brew list --casks | xargs -I {} brew upgrade --cask {}\n'
     'bi' 'brew info '
-    'be' 'brew edit '
+    'be' 'HOMEBREW_TEMP=$TMPDIR brew edit '
     'bl' 'brew list\n'
     'bs' 'brew search '
+    'bc' 'brew cat '
     'b/' 'brew list | ag '
 
     # rvm
