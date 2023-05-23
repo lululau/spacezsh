@@ -110,7 +110,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     '+x' 'chmod +x _@_'
     'te' 'tree -NC\n'
     'tE' 'exa -Tl\n'
-    'mm' 'sudo PAGER=mitmproxy-viewer mitmproxy -m transparent --showhost -k -p 8888\n'
+    'mm' 'sudo -u nobody PAGER=mitmproxy-viewer mitmproxy -m transparent --showhost -k -p 8888\n'
     'mM' 'PAGER=mitmproxy-viewer mitmproxy --showhost -k -p 8888\n'
     'tp' 'sudo toggle-pf all\n'
     'tP' 'sudo toggle-pf\n'
