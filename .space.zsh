@@ -43,7 +43,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
 )
 
 typeset -A SPACEZSH_EMACS_EXT_MAPPINGS=(
-    $'\ex' spacezsh.emacs.widget.dired
+    # $'\ex' spacezsh.emacs.widget.dired
     $'\eO' spacezsh.emacs.widget.capture
 )
 
