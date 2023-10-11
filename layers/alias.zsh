@@ -116,6 +116,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'tP' 'sudo toggle-pf\n'
     'of' 'lsof -Pnp _@_'
     'vi' 'vim _@_\n'
+    'nv' 'nv _@_\n'
     'me' 'me _@_\n'
     'dn' 'download _@_\n'
     'up' 'upload\n'
