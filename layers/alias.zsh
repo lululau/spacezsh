@@ -122,7 +122,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'up' 'upload\n'
     'pc' '_@_ | pc\n'
     'du' 'du -sh\n'
-    'df' '[ -e /usr/local/bin/duf ] && /usr/local/bin/duf -hide-mp "*backup*" || df -h \n'
+    'df' '[ -e $HOMEBREW_PREFIX/bin/duf ] && duf -hide-mp "*backup*" || df -h \n'
     'rh' 'rehash\n'
     'tc' 'tar -zcf _@_.tgz _@_'
     'tx' 'tar -zxf _@_'
