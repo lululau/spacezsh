@@ -249,7 +249,7 @@ spacezsh.fzf.widget.tmux_attach_session() {
     zle redisplay
     return 0
   fi
-  BUFFER="tmux attach -t $session"
+  BUFFER="tmux attach -t '$session'"
   zle accept-line
 }
 zle     -N    spacezsh.fzf.widget.tmux_attach_session
