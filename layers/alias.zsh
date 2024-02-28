@@ -208,8 +208,8 @@ function spacezsh.alias.widget() {
       value=${BUFFER%|*}
     else
         for i ({1..10}); do
-            if [[ "$value" =~ _$i_ ]]; then
-              value=${value//_$i_/$args[$i]}
+            if [[ "$value" =~ _${i}_ ]]; then
+              value=${value//_${i}_/$args[$i]}
             fi
         done
     fi
