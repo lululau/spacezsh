@@ -22,6 +22,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'l' ~/Library/Application\ Support
     'L' ~/Library/Preferences
     'm' ~/Movies
+    'o' ~/sd
     'p' '=> popd -q; chpwd'
     'P' '=> project_root_widget'
     'r' ~/.tmux-resurrect
