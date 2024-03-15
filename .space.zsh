@@ -18,11 +18,11 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'H' /home
     'i' ~/Library/Mobile\ Documents/com~apple~CloudDocs
     'j' ~/cascode/spring/demo
-    'k' ~/kt
+    'K' ~/kt
     'l' ~/Library/Application\ Support
     'L' ~/Library/Preferences
     'm' ~/Movies
-    'o' ~/sd
+    'k' ~/sd
     'p' '=> popd -q; chpwd'
     'P' '=> project_root_widget'
     'r' ~/.tmux-resurrect
