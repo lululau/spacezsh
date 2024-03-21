@@ -47,7 +47,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'bl' 'brew list\n'
     'bs' 'brew search '
     'bc' 'brew cat '
-    'b/' 'brew list | ag '
+    'b/' 'brew list | rg '
 
     # rvm
     'rl' 'rvm list\n'
@@ -92,14 +92,14 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
 
     # Sys Admin
     'sL' "$([ $(uname) = Linux ] && echo 'sudo systemctl list-units | grep ' || echo 'brew services list\\n')"
-    'sl' "$([ $(uname) = Linux ] && echo 'sudo systemctl status ' || echo 'brew services list | ag ')"
+    'sl' "$([ $(uname) = Linux ] && echo 'sudo systemctl status ' || echo 'brew services list | rg ')"
     'si' "$([ $(uname) = Linux ] && echo 'sudo systemctl cat ' || echo 'brew services info --json ')"
     'ss' "$([ $(uname) = Linux ] && echo 'sudo systemctl start ' || echo 'brew services start ')"
     'se' "$([ $(uname) = Linux ] && echo 'sudo systemctl stop ' || echo 'brew services stop ')"
     'sr' "$([ $(uname) = Linux ] && echo 'sudo systemctl restart ' || echo 'brew services restart ')"
     'pi' 'ping '
     'if' 'ifconfig '
-    'ps' 'ps -ef | ag '
+    'ps' 'ps -ef | rg '
     'rc' 'rsync -az --progress _@_'
     'rC' 'rsync -az --progress --delete _@_'
     'tr' 'traceroute '
@@ -148,8 +148,8 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     # Files
     'ff' 'find . -name '
     'fF' 'mfd -o . '
-    'f/' '_@_ || ag '
-    'ag' '_@_ || ag '
+    'f/' '_@_ || rg '
+    'rg' '_@_ || rg '
     'ee' 'ee _@_\n'
     'fe' 'ee _@_\n'
     'fE' 'see _@_\n'
