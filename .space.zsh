@@ -21,7 +21,8 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'K' ~/kt
     'l' ~/Library/Application\ Support
     'L' ~/Library/Preferences
-    'm' ~/Movies
+    'm' ~/Documents/materials
+    'M' ~/Movies
     'k' ~/sd
     'p' '=> popd -q; chpwd'
     'P' '=> project_root_widget'
@@ -35,7 +36,6 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'Z' ~/.oh-my-zsh
     'v' /Volumes
     $'\eh' ~
-    'm' ~/Movies
     '/' /
     $'\e/' /
     't' ~/tmp
