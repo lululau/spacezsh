@@ -74,41 +74,45 @@ spacezsh.fzf.widget.cd-norecursive() {
     zle -K main
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'enter:execute(echo)+accept,alt-enter:accept,alt-a:execute(echo cd ..)+accept,alt-p:execute(echo popd -q)+accept,alt-h:execute(echo cd __HOME_IN_FZF__)+accept,alt-/:execute(echo cd __ROOT_IN_FZF__)+accept,alt-o:execute(echo cd -)+accept,space:execute(echo exit)+accept,alt-x:execute(echo cd-widget)+accept,ctrl-t:execute(echo fzf-file)+accept')"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,space,alt-x,ctrl-t')"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
     fi
 
-    file="${res#$'\n'}"
+    local should_exit=false
+    results=(${(f)res})
+    key="${results[1]}"
+    file="${results[2]}"
 
-    if [[ "$res[1]" = $'\n' && -d "$file" ]]; then
+    if [[ "$key" = 'enter' && -d "$file" ]]; then
       cd "$file"
-    elif [[ "$res" = $'cd ..'* ]]; then
+    elif [[ "$key" = 'alt-a' ]]; then
       cd ..
-    elif [[ "$res" = $'cd __HOME_IN_FZF__'* ]]; then
+    elif [[ "$key" = 'alt-h' ]]; then
       cd ~
-    elif [[ "$res" = $'cd __ROOT_IN_FZF__'* ]]; then
+    elif [[ "$key" = 'alt-/' ]]; then
       cd /
-    elif [[ "$res" = $'popd -q'* ]]; then
+    elif [[ "$key" = 'alt-p' ]]; then
       popd -q
-    elif [[ "$res" = $'cd -'* ]]; then
+    elif [[ "$key" = 'alt-o' ]]; then
       cd -
-    elif [[ "$res" = $'exit\n'* ]]; then
-      cd "${res#$'exit\n'}"
-    elif [[ "$res" = $'cd-widget'* ]]; then
+    elif [[ "$key" = space ]]; then
+      cd "$file"
+      should_exit=true
+    elif [[ "$key" = 'alt-x' ]]; then
       zle spacezsh.fzf.widget.cd
-    elif [[ "$res" = $'fzf-file'* ]]; then
+    elif [[ "$key" = 'ctrl-t' ]]; then
       zle spacezsh.fzf.widget.fzf-file-widget-wrapper
     else
-      LBUFFER="${LBUFFER}${(q)file} "
+      LBUFFER="${LBUFFER}${(q)results[1]} "
       omz_termsupport_precmd
       reset-prompt
       return 0
     fi
 
     local ret=$?
-    if [[ "$res[1]" = $'\n' || "$res" = $'cd ..\n'* || "$res" = $'popd -q\n'* || "$res" = $'cd -\n'* || "$res" = $'cd __HOME_IN_FZF__'* || "$res" = $'cd __ROOT_IN_FZF__'* ]]; then
+    if [[ "$should_exit" = false ]]; then
         spacezsh.fzf.widget.cd-norecursive false
     fi
     if [[ "$1" != false ]]; then
@@ -126,36 +130,44 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
     local old_lbuffer=$LBUFFER
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'enter:execute(echo)+accept,alt-enter:accept,alt-a:execute(echo cd ..)+accept,alt-p:execute(echo popd -q)+accept,alt-h:execute(echo cd __HOME_IN_FZF__)+accept,alt-/:execute(echo cd __ROOT_IN_FZF__)+accept,alt-o:execute(echo cd -)+accept,alt-x:execute(echo cd-widget)+accept,ctrl-t:execute(echo cd-widget)+accept')"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,alt-x,ctrl-t')"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
     fi
 
-    file="${res#$'\n'}"
+    local should_exit=false
+    results=(${(f)res})
+    key="${results[1]}"
+    file="${results[2]}"
 
-    if [[ "$res[1]" = $'\n' && -d "$file" ]]; then
+    if [[ "$key" = 'enter' && -d "$file" ]]; then
       cd "$file"
-    elif [[ "$res" = $'cd ..'* ]]; then
+    elif [[ "$key" = 'alt-a' ]]; then
       cd ..
-    elif [[ "$res" = $'cd __HOME_IN_FZF__'* ]]; then
+    elif [[ "$key" = 'alt-h' ]]; then
       cd ~
-    elif [[ "$res" = $'cd __ROOT_IN_FZF__'* ]]; then
+    elif [[ "$key" = 'alt-/' ]]; then
       cd /
-    elif [[ "$res" = $'popd -q'* ]]; then
+    elif [[ "$key" = 'alt-p' ]]; then
       popd -q
-    elif [[ "$res" = $'cd -'* ]]; then
+    elif [[ "$key" = 'alt-o' ]]; then
       cd -
-    elif [[ "$res" = $'cd-widget'* ]]; then
+    elif [[ "$key" = 'alt-x' ]]; then
+      should_exit=true
       zle spacezsh.fzf.widget.cd false
+    elif [[ "$key" = 'ctrl-t' ]]; then
+      should_exit=true
+      zle spacezsh.fzf.widget.fzf-file-widget-wrapper
     else
-      LBUFFER="${LBUFFER}$(echo ${file:a} | sed 's/^/'\''/;s/$/'\''/') "
+      should_exit=true
+      LBUFFER="${LBUFFER}$(echo ${results[1]:a} | sed 's/^/'\''/;s/$/'\''/') "
       reset-prompt
       return 0
     fi
 
     local ret=$?
-    if [[ "$res[1]" = $'\n' || "$res" = $'cd ..\n'* || "$res" = $'popd -q\n'* || "$res" = $'cd -\n'* || "$res" = $'cd __HOME_IN_FZF__'* || "$res" = $'cd __ROOT_IN_FZF__'* ]]; then
+    if [[ "$should_exit" = false ]]; then
         spacezsh.fzf.widget.select-dir-no-recursive false
     fi
     if [[ "$1" != false ]]; then
