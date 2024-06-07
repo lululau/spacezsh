@@ -51,8 +51,9 @@ typeset -A SPACEZSH_EMACS_EXT_MAPPINGS=(
 typeset -A SPACEZSH_FZF_EXT_MAPPINGS=(
     $'\eg\ec' spacezsh.fzf.widget.git-checkout
     $'\eC' spacezsh.fzf.widget.select-dir-no-recursive
-    $'\et' spacezsh.fzf.widget.no-recursive
+    $'\et' spacezsh.fzf.widget.cd
     $'\eX' spacezsh.fzf.widget.cd
+    $'\eT' spacezsh.fzf.widget.no-recursive
     $'\ec' spacezsh.fzf.widget.cd-norecursive
     $'\ej' spacezsh.fzf.widget.auotjump
     $'\eJ' spacezsh.fzf.widget.select-dir-autojump
