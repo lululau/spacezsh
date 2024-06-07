@@ -105,7 +105,11 @@ spacezsh.fzf.widget.cd-norecursive() {
     elif [[ "$key" = 'ctrl-t' ]]; then
       zle spacezsh.fzf.widget.fzf-file-widget-wrapper
     else
-      LBUFFER="${LBUFFER}${(q)results[1]} "
+      if [[ "$key" = enter ]]; then
+        LBUFFER="${LBUFFER}${(q)file} "
+      else
+        LBUFFER="${LBUFFER}${(q)results[1]} "
+      fi
       omz_termsupport_precmd
       reset-prompt
       return 0
