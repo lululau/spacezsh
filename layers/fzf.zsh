@@ -74,7 +74,7 @@ spacezsh.fzf.widget.cd-norecursive() {
     zle -K main
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,space,alt-x,ctrl-t')"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,space,alt-x,alt-t,ctrl-t')"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
@@ -100,9 +100,10 @@ spacezsh.fzf.widget.cd-norecursive() {
     elif [[ "$key" = space ]]; then
       cd "$file"
       should_exit=true
-    elif [[ "$key" = 'alt-x' ]]; then
+    elif [[ "$key" = 'alt-x' || "$key" = 'alt-t' ]]; then
       zle spacezsh.fzf.widget.cd
     elif [[ "$key" = 'ctrl-t' ]]; then
+      should_exit=true
       zle spacezsh.fzf.widget.fzf-file-widget-wrapper
     else
       if [[ "$key" = enter ]]; then
@@ -134,7 +135,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
     local old_lbuffer=$LBUFFER
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,alt-x,ctrl-t')"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,alt-x,alt-t,ctrl-t')"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
@@ -157,7 +158,7 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
       popd -q
     elif [[ "$key" = 'alt-o' ]]; then
       cd -
-    elif [[ "$key" = 'alt-x' ]]; then
+    elif [[ "$key" = 'alt-x' || "$key" = 'alt-t' ]]; then
       should_exit=true
       zle spacezsh.fzf.widget.cd false
     elif [[ "$key" = 'ctrl-t' ]]; then
