@@ -74,7 +74,8 @@ spacezsh.fzf.widget.cd-norecursive() {
     zle -K main
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,space,alt-x,alt-t,ctrl-t')"
+    local help="enter: enter dir, alt-enter: accept, space: enter then accept, alt-a: parent directory, alt-h: home, alt-/: root, alt-p: popd, alt-o: last dir,  alt-t: recursive dir, ctrl-t: recursive files"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,space,alt-x,alt-t,ctrl-t' --header="$help")"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
@@ -135,7 +136,8 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
     local old_lbuffer=$LBUFFER
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,alt-x,alt-t,ctrl-t')"
+    local help="enter: enter dir, alt-enter: accept, space: enter then accept, alt-a: parent directory, alt-h: home, alt-/: root, alt-p: popd, alt-o: last dir, alt-t: recursive dir, ctrl-t: recursive files"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,alt-x,alt-t,ctrl-t' --header "$help")"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
