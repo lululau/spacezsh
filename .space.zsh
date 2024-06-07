@@ -26,6 +26,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'k' ~/sd
     'p' '=> popd -q; chpwd'
     'P' '=> project_root_widget'
+    $'\eR' '=> project_root_widget'
     'r' ~/.tmux-resurrect
     's' ~/Documents/scratches
     'S' ~/snips
