@@ -168,7 +168,11 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
       zle spacezsh.fzf.widget.fzf-file-widget-wrapper
     else
       should_exit=true
-      LBUFFER="${LBUFFER}$(echo ${results[1]:a} | sed 's/^/'\''/;s/$/'\''/') "
+      if [[ "$key" = enter && -n "$file" ]]; then
+        LBUFFER="${LBUFFER}$(echo ${file:a} | sed 's/^/'\''/;s/$/'\''/') "
+      else
+        LBUFFER="${LBUFFER}$(echo ${results[1]:a} | sed 's/^/'\''/;s/$/'\''/') "
+      fi
       reset-prompt
       return 0
     fi
