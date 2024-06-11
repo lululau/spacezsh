@@ -42,6 +42,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     't' ~/tmp
     $'\ea' ..
     $'\ep' '=> popd -q; chpwd'
+    $'\e-' '-'
 )
 
 typeset -A SPACEZSH_EMACS_EXT_MAPPINGS=(

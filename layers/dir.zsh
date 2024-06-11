@@ -8,6 +8,8 @@ spacezsh.dir.widget() {
     local value=$SPACEZSH_DIR_MAPPINGS[${KEYS#d}]
     if [[ "$value" =~ '^=> ' ]]; then
         eval ${value#=> }
+    elif [[ "$value" = '-' ]]; then
+        cd "$OLDPWD"
     else
         cd "$value"
     fi
