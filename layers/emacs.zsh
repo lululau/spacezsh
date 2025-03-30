@@ -83,7 +83,7 @@ if [ -n "$SPACEZSH_EMACS_USE_TUI_AS_VISUAL" ]; then
     export VISUAL=spacezsh.emacs.emacsclient-func
 fi
 
-bindkey -M SPACEZSH_KEYMAP "/" spacezsh.emacs.widget.search
+# bindkey -M SPACEZSH_KEYMAP "/" spacezsh.emacs.widget.search
 bindkey -M SPACEZSH_KEYMAP "ed" spacezsh.emacs.widget.dired
 bindkey -M SPACEZSH_KEYMAP "x" spacezsh.emacs.widget.dired
 bindkey -M SPACEZSH_KEYMAP "ec" spacezsh.emacs.widget.capture

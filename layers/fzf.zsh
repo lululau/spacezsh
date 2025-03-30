@@ -311,8 +311,28 @@ spacezsh.fzf.widget.java-class-names() {
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
 }
-
 zle     -N    spacezsh.fzf.widget.java-class-names
+
+spacezsh.fzf.widget.rg() {
+  local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
+  local RELOAD='reload:rg --column --color=always --smart-case {q} || :'
+  local OPENER='nvim {1} +{2}'
+  fzf --disabled --ansi --multi \
+      --bind "start:$RELOAD" --bind "change:$RELOAD" \
+      --bind "enter:become:$OPENER" \
+      --bind "ctrl-o:execute:$OPENER" \
+      --bind 'alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview' \
+      --delimiter : \
+      --preview 'bat --style=full --color=always --highlight-line {2} {1}' \
+      --preview-window '~4,+{2}+4/3,<80(up)' \
+      --query "$word"
+  setopt localoptions pipefail 2> /dev/null
+  zle -K main
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+}
+zle     -N   spacezsh.fzf.widget.rg
+
 
 bindkey -M SPACEZSH_KEYMAP "gc" spacezsh.fzf.widget.git-checkout
 bindkey -M SPACEZSH_KEYMAP "zC" spacezsh.fzf.widget.select-dir-no-recursive
@@ -329,9 +349,10 @@ bindkey -M SPACEZSH_KEYMAP "ta" spacezsh.fzf.widget.tmux_attach_session
 bindkey -M SPACEZSH_KEYMAP "zf" spacezsh.fzf.widget.fzf-file-widget-wrapper
 bindkey -M SPACEZSH_KEYMAP "zt" spacezsh.fzf.widget.fzf-file-widget-wrapper
 bindkey -M SPACEZSH_KEYMAP "zJ" spacezsh.fzf.widget.java-class-names
+bindkey -M SPACEZSH_KEYMAP "/" spacezsh.fzf.widget.rg
 
 if [[ -z "$SPACEZSH_FZF_EXT_MAPPINGS" ]]; then
-  typeset -A SPACEZSH_FZF_EXT_MAPPINGS=()
+  typeset -A SPACEZSH_FZF_EXT_MAPPINGS=() fed
 fi
 
 for k (${(k)SPACEZSH_FZF_EXT_MAPPINGS}); do
