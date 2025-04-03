@@ -315,7 +315,7 @@ zle     -N    spacezsh.fzf.widget.java-class-names
 
 spacezsh.fzf.widget.rg() {
   local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
-  local RELOAD='reload:rg --column --color=always --smart-case {q} || :'
+  local RELOAD='reload:rg --column --color=always --smart-case $(echo {q}) || :'
   local OPENER='nvim {1} +{2}'
   fzf --disabled --ansi --multi \
       --bind "start:$RELOAD" --bind "change:$RELOAD" \
