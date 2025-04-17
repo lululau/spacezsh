@@ -74,8 +74,8 @@ spacezsh.fzf.widget.cd-norecursive() {
     zle -K main
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local help="enter: enter dir, alt-enter: accept, space: enter then accept, alt-a: parent directory, alt-h: home, alt-/: root, alt-p: popd, alt-o: last dir,  alt-t: recursive dir, ctrl-t: recursive files"
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,space,alt-x,alt-t,ctrl-t' --header="$help")"
+    local help="enter: enter dir, alt-enter: accept, space: enter then accept, alt-a: parent directory, alt-h: home, alt-/: root, alt-p: popd, alt-o: last dir,  alt-t: recursive dir, ctrl-t: recursive files, alt-l: lnav, alt-v: vim"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,space,alt-x,alt-t,ctrl-t,alt-l,alt-v' --header="$help")"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
@@ -109,6 +109,12 @@ spacezsh.fzf.widget.cd-norecursive() {
     else
       if [[ "$key" = enter ]]; then
         LBUFFER="${LBUFFER}${(q)file} "
+      elif [[ "$key" = 'alt-l' ]]; then
+        LBUFFER="${LBUFFER}lnav ${(q)file}"
+        zle accept-line
+      elif [[ "$key" = 'alt-v' ]]; then
+        LBUFFER="${LBUFFER}vim ${(q)file}"
+        zle accept-line
       else
         LBUFFER="${LBUFFER}${(q)results[1]} "
       fi
@@ -136,8 +142,8 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
     local old_lbuffer=$LBUFFER
     local FZF_HEIGHT=90%
     setopt localoptions pipefail 2> /dev/null
-    local help="enter: enter dir, alt-enter: accept, space: enter then accept, alt-a: parent directory, alt-h: home, alt-/: root, alt-p: popd, alt-o: last dir, alt-t: recursive dir, ctrl-t: recursive files"
-    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,alt-x,alt-t,ctrl-t' --header "$help")"
+    local help="enter: enter dir, alt-enter: accept, space: enter then accept, alt-a: parent directory, alt-h: home, alt-/: root, alt-p: popd, alt-o: last dir, alt-t: recursive dir, ctrl-t: recursive files, alt-l: lnav, alt-v: vim"
+    local res="$({ gls -Atp --group-directories-first --color=no; [[ -z "$(ls -A | head -c 1)" ]] && echo ../ } | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} $FZF_DEFAULT_OPTS $FZF_ALT_V_OPTS" fzf +m --header="$PWD" --bind 'alt-enter:accept' --expect 'enter,alt-a,alt-p,alt-h,alt-/,alt-o,alt-x,alt-t,ctrl-t,alt-l,alt-v' --header "$help")"
     if [[ -z "$res" ]]; then
         zle redisplay
         return 0
@@ -170,6 +176,12 @@ spacezsh.fzf.widget.select-dir-no-recursive() {
       should_exit=true
       if [[ "$key" = enter && -n "$file" ]]; then
         LBUFFER="${LBUFFER}$(echo ${file:a} | sed 's/^/'\''/;s/$/'\''/') "
+      elif [[ "$key" = 'alt-l' ]]; then
+        LBUFFER="${LBUFFER}lnav ${(q)file}"
+        zle accept-line
+      elif [[ "$key" = 'alt-v' ]]; then
+        LBUFFER="${LBUFFER}vim ${(q)file}"
+        zle accept-line
       else
         LBUFFER="${LBUFFER}$(echo ${results[1]:a} | sed 's/^/'\''/;s/$/'\''/') "
       fi
