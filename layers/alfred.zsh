@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 spacezsh.alfred.browse-in-alfred() {
-    osascript -e "tell app \"Alfred 3\" to browse \"$PWD/\""
+    osascript -e "tell app \"Alfred 5\" to browse \"$PWD/\""
     zle -K main
 }
 
