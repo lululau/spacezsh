@@ -3,7 +3,7 @@
 SPACEZSH_LAYERS=(alias alfred dir emacs enhanced-vi fzf kill tmux issh nnn)
 
 typeset -A SPACEZSH_DIR_MAPPINGS=(
-    'a' ..
+    'a' ~/global-claude
     'A' /Applications
     'b' ~/blog
     'B' ~/bin
