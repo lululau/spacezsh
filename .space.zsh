@@ -19,7 +19,8 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'i' ~/Library/Mobile\ Documents/com~apple~CloudDocs
     'j' ~/cascode/spring/demo
     'K' ~/kt
-    'l' ~/Library/Application\ Support
+    'l' ~/lab
+    'p' ~/Library/Application\ Support
     'L' ~/Library/Preferences
     'm' ~/Documents/materials
     'M' ~/Movies
