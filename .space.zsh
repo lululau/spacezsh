@@ -25,7 +25,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'm' ~/Documents/materials
     'M' ~/Movies
     'k' ~/sd
-    'p' '=> popd -q; chpwd'
+    # 'p' '=> popd -q; chpwd'
     'P' '=> project_root_widget'
     $'\eR' '=> project_root_widget'
     'r' ~/.tmux-resurrect
