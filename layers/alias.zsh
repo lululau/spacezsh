@@ -99,7 +99,7 @@ typeset -A SPACEZSH_ALIAS_MAPPINGS=(
     'sr' "$([ $(uname) = Linux ] && echo 'sudo systemctl restart ' || echo 'brew services restart ')"
     'pi' 'ping '
     'if' 'ifconfig '
-    'ps' 'ps -ef | rg '
+    'ps' 'ps -eo user,pid,ppid,lstart,tty,time,command | rg '
     'rc' 'rsync -az --progress _@_'
     'rC' 'rsync -az --progress --delete _@_'
     'tr' 'traceroute '
