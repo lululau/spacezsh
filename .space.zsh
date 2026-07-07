@@ -17,7 +17,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'h' ~
     'H' /home
     'i' ~/Library/Mobile\ Documents/com~apple~CloudDocs
-    'j' ~/cascode/spring/demo
+    'j' ~/Documents/materials/journal
     'K' ~/kt
     'l' ~/lab
     'p' ~/Library/Application\ Support
@@ -25,6 +25,7 @@ typeset -A SPACEZSH_DIR_MAPPINGS=(
     'm' ~/Documents/materials
     'M' ~/Movies
     'k' ~/sd
+    'O' ~/Obsidian/Documents/Main/
     # 'p' '=> popd -q; chpwd'
     'P' '=> project_root_widget'
     $'\eR' '=> project_root_widget'
