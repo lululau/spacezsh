@@ -1,6 +1,14 @@
 #!/usr/bin/env zsh
 
-alias issh='SSH_INTERACTIVE=1 ssh'
+unalias issh 2>/dev/null
+issh() {
+  SSH_INTERACTIVE=1 command ssh "$@"
+  local ret=$?
+  if [[ -t 1 ]]; then
+    printf '\e]0;\a'
+  fi
+  return $ret
+}
 
 spacezsh.issh.fzfcmd_complete() {
     local FZF_HEIGHT=$([[ -n "$FZF_TMUX" && -n "$TMUX_PANE" ]] && echo ${FZF_TMUX_HEIGHT:-40%} || echo 100%)
@@ -13,7 +21,7 @@ spacezsh.issh.widget() {
   fzf="$(spacezsh.issh.fzfcmd_complete)"
   matches=$(awk '/^Host [a-zA-Z0-9_]/ {host=$2} /^[ ]*Host[Nn]ame / {hostname=$2; printf "%-21s[%s]\n", host, hostname}' ~/.ssh/config | FZF_DEFAULT_OPTS="--height ${FZF_HEIGHT} --min-height 15 --reverse $FZF_DEFAULT_OPTS --preview 'echo {}' --preview-window down:3:wrap $FZF_COMPLETION_OPTS" $(__fzfcmd) +m)
   if [ -n "$matches" ]; then
-    LBUFFER="SSH_INTERACTIVE=1 ssh ${matches%% *}"
+    LBUFFER="issh ${matches%% *}"
   fi
   zle -K main
   zle accept-line
